@@ -1,10 +1,8 @@
-import React from 'react'
-import {Button, Modal, Container, Image, ButtonGroup} from 'react-bootstrap';
-import { Jumbotron } from '../../components/Jumbotron';
+import {useState} from 'react';
+import {Modal} from 'react-bootstrap';
 import parse from 'html-react-parser';
-import LightBoxWrapper from "../../components/light-box/LightBoxWrapper";
-import '../../App.css';
-import {data} from "./project-data";
+import LightBoxWrapper from '../../components/light-box/LightBoxWrapper';
+import {data} from './project-data';
 
 interface ProjectDetailProps {
     show: boolean;
@@ -12,129 +10,90 @@ interface ProjectDetailProps {
     closeAction: () => void;
 }
 
-export default function ProjectDetail(props: ProjectDetailProps){
-    const [show, setShow] = React.useState(props.show || false);
-    const [card, setCard] = React.useState(props.card);
-    const [showLightBox, setShowLightBox] = React.useState(false);
-    const [srcIndex, setSrcIndex] = React.useState(0);
-
-    React.useEffect(()=>{
-        setShow(props.show);
-        setCard(props.card);
-    },[props.show, props.card])
-
-    const handleClose = () => {
-        setShowLightBox(false);
-    }
-
-    const viewLightbox = (srcIndex: number) => {
-        console.log(srcIndex, 'true')
-        setShowLightBox(true);
-        setSrcIndex(srcIndex)
-    }
-
-    if (!(card in data)) {
-        return null
-    }
-
+export default function ProjectDetail({show, card, closeAction}: ProjectDetailProps) {
+    const [showLightBox, setShowLightBox] = useState(false);
+    const [srcIndex, setSrcIndex] = useState(0);
     const detail = data[card];
 
+    if (!detail) return null;
+
+    const images = detail.imgs ?? [];
+    const videos = detail.vids ?? [];
+    const mobileVideos = detail.mobileVids ?? [];
+    const hasMedia = images.length + videos.length + mobileVideos.length > 0;
+
+    const openLightbox = (index: number) => {
+        setSrcIndex(index);
+        setShowLightBox(true);
+    };
+
     return (
-        <React.Fragment>
-            <Modal show={show} onHide={handleClose} className="modal-page">
-                <div className="text-right pr-3">
-                    <Button variant="back" onClick={props.closeAction}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                             className="bi bi-chevron-double-left" viewBox="0 0 30 30">
-                            <path fillRule="evenodd"
-                                  d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                            <path fillRule="evenodd"
-                                  d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                        </svg>
-                        Back
-                    </Button>
-                </div>
-                <Jumbotron className="img-container2 bg-transparent">
-                    <h1>{detail.cardTitle}</h1>
-                    <Container
-                        className="d-flex flex-lg-row flex-column flex-wrap justify-content-lg-start align-items-lg-center justify-content-center align-items-start aboutme">
-                        <div className="project-media">
-                            {detail.vids ?
-                                <div className="video-box" >
-                                    {detail.vids.map((src, idx) =>
-                                        <div key={idx} className="project-video">
-                                            <div className="overlay-text"><span>{detail.vidTitle?.[idx]}</span></div>
-                                            <video poster={detail.poster?.[idx]} controls>
-                                                <source src={src} type="video/mp4"/>Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    )}
-                                </div>
-                            : ''
-                            }
-                            {detail.imgs ?
-                                <div className="image-box">
-                                    {detail.imgs.map((src, idx) =>
-                                        <div key={idx} className="project-img" onClick={() => viewLightbox(idx)}>
-                                            <div className="overlay-text"><span>Click to enlarge</span></div>
-                                            <Image src={src} key={idx}/>
-                                        </div>
-                                    )}
-                                </div>
-                                : ''
-                            }
-                             {detail.mobileVids ?
-                                <div className="video-box mobile" >
-                                    {detail.mobileVids.map((src, idx) =>
-                                        <div key={idx} className="project-video">
-                                            <div className="overlay-text"><span>{detail.vidTitle?.[idx]}</span></div>
-                                            <video poster={detail.poster?.[idx]} controls>
-                                                <source src={src} type="video/mp4"/>Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    )}
-                                </div>
-                            : ''
-                            }
-                        </div>
-                        <div className="project-desc">
+        <Modal show={show} onHide={closeAction} className="case-modal" fullscreen animation>
+            <Modal.Header className="case-nav">
+                <button className="case-close" type="button" onClick={closeAction} aria-label="Close case study">
+                    <span aria-hidden="true">←</span> Back to work
+                </button>
+                <span>Case study · {String(card).padStart(2, '0')}</span>
+            </Modal.Header>
+
+            <Modal.Body className="case-body">
+                <header className="case-hero">
+                    <div className="page-width case-hero-inner">
+                        <p className="eyebrow light">Selected work</p>
+                        <h1>{detail.cardTitle}</h1>
+                        <div className="case-summary">
                             <p>{parse(detail.cardText)}</p>
+                            <div className="case-actions">
+                                {detail.buttonCode && <a className="button button-primary" href={detail.buttonCode} target="_blank" rel="noopener noreferrer">View code ↗</a>}
+                                {detail.buttonWebsite && <a className="text-link light" href={detail.buttonWebsite} target="_blank" rel="noopener noreferrer">Visit website <span>↗</span></a>}
+                                {detail.buttonAffiliate && <a className="text-link light" href={detail.buttonAffiliate} target="_blank" rel="noopener noreferrer">Affiliate website <span>↗</span></a>}
+                            </div>
                         </div>
-                        {detail.buttonCode ?
-                            <ButtonGroup className="justify-content-between">
-                                <Button
-                                    variant="loading"
-                                    href={detail.buttonCode}
-                                    target="_blank"
-                                >
-                                    View Code
-                                </Button>
-                            </ButtonGroup>
-                            :
-                            null
-                        }
-                        {detail.buttonAffiliate ?
-                            <ButtonGroup className="justify-content-between">
-                                <Button
-                                    variant="loading"
-                                    href={detail.buttonAffiliate}
-                                    target="_blank"
-                                >
-                                    View Affiliate Website
-                                </Button>
-                            </ButtonGroup>
-                            :
-                            null
-                        }
-                    </Container>
-                </Jumbotron>
-               { showLightBox ? <LightBoxWrapper
-                    isOpen={showLightBox}
-                    srcIndex={srcIndex}
-                    card={detail}
-                    handleClose={handleClose}
-                />  : null }
-            </Modal>
-        </React.Fragment>
-    )
+                    </div>
+                </header>
+
+                <section className="case-media page-width" aria-label="Project media">
+                    {!hasMedia && (
+                        <div className="case-placeholder healthcare-visual" aria-label="Healthcare, code and secure connectivity">
+                            <span>Care</span><span>Code</span><span>Connect</span>
+                        </div>
+                    )}
+
+                    {videos.map((src, index) => (
+                        <figure className="case-media-item case-video" key={src}>
+                            <video poster={detail.poster?.[index]} controls preload="metadata">
+                                <source src={src}/>
+                                Your browser does not support the video tag.
+                            </video>
+                            <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{detail.vidTitle?.[index] ?? 'Product walkthrough'}</figcaption>
+                        </figure>
+                    ))}
+
+                    {images.map((src, index) => (
+                        <button className="case-media-item case-image" type="button" key={src} onClick={() => openLightbox(index)}>
+                            <img src={src} alt={detail.imgTitle?.[index] ?? `${detail.cardTitle} interface ${index + 1}`} loading="lazy"/>
+                            <span className="case-image-label"><i>{String(index + 1).padStart(2, '0')}</i> {detail.imgTitle?.[index] ?? 'View image'} <b>↗</b></span>
+                        </button>
+                    ))}
+
+                    {mobileVideos.map((src, index) => (
+                        <figure className="case-media-item case-video case-mobile-video" key={src}>
+                            <video poster={detail.poster?.[index]} controls preload="metadata">
+                                <source src={src}/>
+                                Your browser does not support the video tag.
+                            </video>
+                            <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{detail.vidTitle?.[index] ?? 'Mobile experience'}</figcaption>
+                        </figure>
+                    ))}
+                </section>
+
+                <footer className="case-footer page-width">
+                    <p>End of case study</p>
+                    <button className="text-link" type="button" onClick={closeAction}>Back to selected work <span>↑</span></button>
+                </footer>
+            </Modal.Body>
+
+            {showLightBox && <LightBoxWrapper isOpen srcIndex={srcIndex} card={detail} handleClose={() => setShowLightBox(false)}/>}
+        </Modal>
+    );
 }

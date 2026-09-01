@@ -1,82 +1,48 @@
-import './App.css';
-import {useEffect} from 'react';
-import {Container} from 'react-bootstrap';
+import {useEffect, useState} from 'react';
 
-class TypeWriter {
-    private text = '';
-    private isDeleting = false;
-    private timeoutId?: number;
-
-    constructor(
-        private readonly element: HTMLElement,
-        private readonly batches: string[][],
-        private readonly period = 2000,
-    ) {
-        this.tick();
-    }
-
-    stop() {
-        if (this.timeoutId !== undefined) window.clearTimeout(this.timeoutId);
-    }
-
-    private tick = () => {
-        const fullText = this.batches[0].join('<br/>');
-
-        if (this.isDeleting) {
-            this.text = '';
-        } else if (this.text.length === 13) {
-            const end = fullText.lastIndexOf('$');
-            this.text = fullText.substring(0, end + 2);
-        } else {
-            this.text = fullText.substring(0, this.text.length + 1);
-        }
-
-        this.element.innerHTML = `<span class="wrap">${this.text}</span>`;
-        let delay = 200 - Math.random() * 100;
-        if (this.isDeleting) delay /= 2;
-        if (!this.isDeleting && this.text === fullText) {
-            delay = this.period;
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.text === '') {
-            this.isDeleting = false;
-            delay = 500;
-        }
-        if (this.text.length === 190) delay = 700;
-        this.timeoutId = window.setTimeout(this.tick, delay);
-    };
-}
+const commands = [
+    'python manage.py runserver',
+    'npm run build',
+    'npx expo start',
+    'git commit -m "keep growing"',
+];
 
 function Home() {
-    useEffect(() => {
-        const writers = Array.from(document.querySelectorAll<HTMLElement>('.typewrite')).flatMap((element) => {
-            const value = element.dataset.type;
-            if (!value) return [];
-            const batches = JSON.parse(value) as string[][];
-            batches[0].push('<span><span style="color:lawngreen;">priska</span>:<span style="color:mediumslateblue;">~</span>$ clear');
-            return [new TypeWriter(element, batches, Number(element.dataset.period) || 2000)];
-        });
+    const [command, setCommand] = useState('');
+    const [commandIndex, setCommandIndex] = useState(0);
 
-        const style = document.createElement('style');
-        style.textContent = '.typewrite > .wrap { border-right: 0.08em solid #fff}';
-        document.body.appendChild(style);
-        return () => {
-            writers.forEach((writer) => writer.stop());
-            style.remove();
-        };
-    }, []);
+    useEffect(() => {
+        const fullCommand = commands[commandIndex];
+        if (command.length < fullCommand.length) {
+            const timeout = window.setTimeout(() => setCommand(fullCommand.slice(0, command.length + 1)), 55);
+            return () => window.clearTimeout(timeout);
+        }
+        const timeout = window.setTimeout(() => {
+            setCommand('');
+            setCommandIndex((index) => (index + 1) % commands.length);
+        }, 1600);
+        return () => window.clearTimeout(timeout);
+    }, [command, commandIndex]);
 
     return (
-        <div className="Home d-flex flex-column justify-content-center">
-            <Container fluid className="shell">
-                <h1><span className="cl"><span className="green">priska</span>:<span className="blue">~</span>$ </span>
-                    <a href="/" className="typewrite" data-period="2000"
-                       data-type='[["node hello.js", "Hello, World!", "I am Priska Kohnen.", "A full-stack Web Developer."]]'
-                       aria-label="node hello.js Hello, World! I am Priska Kohnen. A full-stack Web Developer. clear">
-                        <span className="wrap" aria-hidden="true"/>
-                    </a>
-                </h1>
-            </Container>
-        </div>
+        <section className="hero" id="home" aria-labelledby="hero-title">
+            <div className="hero-image" role="img" aria-label="A child looking up a long flight of stairs"/>
+            <div className="hero-shade"/>
+            <div className="hero-content page-width">
+                <p className="eyebrow light">Senior Frontend Developer · Frontend Team Lead</p>
+                <h1 id="hero-title">Building thoughtful products.<br/><em>Still climbing.</em></h1>
+                <p className="hero-intro">I’m Priska, a software engineer with 8+ years of experience across healthcare, AI, autonomous mobility and SaaS — from Python and Django to React Native, TypeScript and native mobile development.</p>
+                <div className="hero-actions">
+                    <a className="button button-primary" href="#work">Explore selected work</a>
+                    <a className="text-link light" href="#contact">Let’s work together <span>↗</span></a>
+                </div>
+                <div className="terminal" aria-label={`Terminal command: ${commands[commandIndex]}`}>
+                    <div className="terminal-bar"><i/><i/><i/><span>priska — journey</span></div>
+                    <div className="terminal-body"><span className="prompt">priska@portfolio:~$</span> {command}<span className="cursor"/></div>
+                </div>
+            </div>
+            <p className="hero-note">The stairs still represent the journey — the terminal, where much of it began.</p>
+        </section>
     );
 }
 

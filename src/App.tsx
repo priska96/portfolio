@@ -1,80 +1,74 @@
-import logo from './images/logo.png';
-import './App.css';
-import React from 'react'
-import {Nav, Navbar} from 'react-bootstrap';
-import Home from './Home'
-import Projects from './pages/projects/Projects'
-import AboutMe from './pages/about-me/AboutMe'
-import Contact from './pages/contact/Contact'
-
+import "./App.css";
+import { useState } from "react";
+import Home from "./Home";
+import AboutMe from "./pages/about-me/AboutMe";
+import Experience from "./pages/experience/Experience";
+import Projects from "./pages/projects/Projects";
+import Contact from "./pages/contact/Contact";
 
 function App() {
-    /*let closeMenu = function (e){
-        if(e.target.closest('.navbar-toggler')){
-            return false;
-        }
-        let menu = document.getElementById('basic-navbar-nav')
-        if(menu.classList.contains('show')){
-            menu.classList.remove('show')
-        }
-    }
-    useEffect(() => {
-        window.onload = function() {
-            document.addEventListener('click',closeMenu)
-        }
-    });*/
-    return (
-            <div className="App">
-                <div className="navigation">
-                    <div className="navigation-sub">
-                        <Navbar bg="light" expand="md" fixed="top" className="bg-light justify-content-end pr-0">
-                            <Navbar.Brand href="/portfolio" className="flex-grow-2 text-right">
-                                <img
-                                    src={logo}
-                                    className="d-inline-block align-top logo"
-                                    alt="React Bootstrap logo"
-                                />
-                            </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="mr-auto flex-grow-1">
-                                    <Nav.Link href="#home" className="flex-grow-1 text-center">Home</Nav.Link>
-                                    <Nav.Link href="#about" className="flex-grow-1 text-center">About Me</Nav.Link>
-                                    <Nav.Link href="#projects" className="flex-grow-1 text-center">Projects</Nav.Link>
-                                    <Nav.Link href="#contact" className="flex-grow-1 text-center">Contact</Nav.Link>
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Navbar>
-                    </div>
-                </div>
-                <a className="anchor" id="home" href='#home'>{" "}</a>
-                <Home/>
-                <a className="anchor" id="about" href="#about"  >{" "}</a>
-                <AboutMe/>
-                <a className="anchor" id="projects" href="#projects">{" "}</a>
-                 <Projects/> 
-                <div id="project-details"/>
-                <a className="anchor" id="contact" href="#contact">{" "}</a>
-                 <Contact/> 
-                <footer>
-                    <div id="go-top">
-                        <a className="smoothscroll" title="Back to Top" href="#home">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                                 className="bi bi-chevron-double-up" viewBox="0 0 18 18">
-                                <path fillRule="evenodd"
-                                      d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
-                                <path fillRule="evenodd"
-                                      d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-                            </svg>
-                        </a>
-                    </div>
-                    {/*Copyright*/}
-                    <div className="text-center p-3 bg-light">
-                        © 2023 Copyright: <span className="text-dark">Priska Kohnen</span>
-                    </div>
-                </footer>
-            </div>
-    );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+      <header className="site-header">
+        <nav className="site-nav" aria-label="Main navigation">
+          <a
+            className="wordmark"
+            href="#home"
+            onClick={closeMenu}
+            aria-label="Priska Kohnen, home"
+          >
+            Priska Kohnen
+          </a>
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="main-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="sr-only">Toggle navigation</span>
+            <span />
+            <span />
+          </button>
+          <div
+            className={`nav-links ${menuOpen ? "is-open" : ""}`}
+            id="main-menu"
+          >
+            <a href="#work" onClick={closeMenu}>
+              Work
+            </a>
+            <a href="#experience" onClick={closeMenu}>
+              Experience
+            </a>
+            <a href="#about" onClick={closeMenu}>
+              About
+            </a>
+            <a href="#contact" onClick={closeMenu}>
+              Contact
+            </a>
+          </div>
+        </nav>
+      </header>
+      <main id="main-content">
+        <Home />
+        <Projects />
+        <Experience />
+        <AboutMe />
+        <Contact />
+      </main>
+      <footer className="site-footer">
+        <p>© {new Date().getFullYear()} Priska Kohnen</p>
+        <p>Designed &amp; built with React and TypeScript.</p>
+        <a href="#home">Back to top ↑</a>
+      </footer>
+    </div>
+  );
 }
 
 export default App;
