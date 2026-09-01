@@ -1,21 +1,43 @@
-import {useState} from 'react';
-import {Modal} from 'react-bootstrap';
+import {useEffect, useState} from 'react';
+import {Link, Navigate, useParams} from 'react-router-dom';
 import parse from 'html-react-parser';
 import LightBoxWrapper from '../../components/light-box/LightBoxWrapper';
-import {data} from './project-data';
+import {data, projects} from './project-data';
 
-interface ProjectDetailProps {
-    show: boolean;
-    card: string;
-    closeAction: () => void;
-}
-
-export default function ProjectDetail({show, card, closeAction}: ProjectDetailProps) {
+export default function ProjectDetail() {
+    const {slug} = useParams<{slug: string}>();
     const [showLightBox, setShowLightBox] = useState(false);
     const [srcIndex, setSrcIndex] = useState(0);
-    const detail = data[card];
+    const projectIndex = projects.findIndex((item) => item.slug === slug);
+    const project = projectIndex >= 0 ? projects[projectIndex] : undefined;
+    const detail = project ? data[project.key] : undefined;
 
-    if (!detail) return null;
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (!detail) return;
+        document.title = `${detail.cardTitle} — Priska Kohnen`;
+        const description = detail.cardText.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        const metaDescription = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+        const openGraphTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
+        const openGraphDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
+        const previousDescription = metaDescription?.content;
+        const previousOpenGraphTitle = openGraphTitle?.content;
+        const previousOpenGraphDescription = openGraphDescription?.content;
+        if (metaDescription) metaDescription.content = description;
+        if (openGraphTitle) openGraphTitle.content = `${detail.cardTitle} — Priska Kohnen`;
+        if (openGraphDescription) openGraphDescription.content = description;
+        return () => {
+            document.title = 'Priska Kohnen — Senior Frontend Developer';
+            if (metaDescription && previousDescription) metaDescription.content = previousDescription;
+            if (openGraphTitle && previousOpenGraphTitle) openGraphTitle.content = previousOpenGraphTitle;
+            if (openGraphDescription && previousOpenGraphDescription) openGraphDescription.content = previousOpenGraphDescription;
+        };
+    }, [detail]);
+
+    if (!detail || !project) return <Navigate to="/" replace/>;
+
+    const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+    const nextProject = projects[(projectIndex + 1) % projects.length];
 
     const images = detail.imgs ?? [];
     const mobileImages = detail.mobileImgs ?? [];
@@ -42,15 +64,16 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
     };
 
     return (
-        <Modal show={show} onHide={closeAction} className="case-modal" fullscreen animation>
-            <Modal.Header className="case-nav">
-                <button className="case-close" type="button" onClick={closeAction} aria-label="Close case study">
+        <div className="case-page">
+            <a className="skip-link" href="#main-content">Skip to case study</a>
+            <header className="case-nav">
+                <Link className="case-close" to="/#work" aria-label="Back to selected work">
                     <span aria-hidden="true">←</span> Back to work
-                </button>
-                <span>Case study · {String(card).padStart(2, '0')}</span>
-            </Modal.Header>
+                </Link>
+                <span>Case study · {String(projectIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+            </header>
 
-            <Modal.Body className="case-body">
+            <main className="case-body" id="main-content">
                 <header className="case-hero">
                     <div className="page-width case-hero-inner">
                         <p className="eyebrow light">Selected work</p>
@@ -140,12 +163,12 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                 </section>
 
                 <footer className="case-footer page-width">
-                    <p>End of case study</p>
-                    <button className="text-link" type="button" onClick={closeAction}>Back to selected work <span>↑</span></button>
+                    <Link className="case-project-nav previous" to={`/work/${previousProject.slug}`}><span>← Previous</span><strong>{previousProject.title}</strong></Link>
+                    <Link className="case-project-nav next" to={`/work/${nextProject.slug}`}><span>Next →</span><strong>{nextProject.title}</strong></Link>
                 </footer>
-            </Modal.Body>
+            </main>
 
             {showLightBox && <LightBoxWrapper isOpen srcIndex={srcIndex} card={detail} handleClose={() => setShowLightBox(false)}/>}
-        </Modal>
+        </div>
     );
 }

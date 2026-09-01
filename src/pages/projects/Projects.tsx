@@ -1,9 +1,7 @@
-import {useState} from 'react';
-import ProjectDetail from './ProjectDetail';
+import {Link} from 'react-router-dom';
 import {projects, type ProjectCardData} from './project-data';
 
 function Projects() {
-    const [selectedProject, setSelectedProject] = useState<string | null>(null);
     const featured = projects.filter((project) => project.featured);
     const archive = projects.filter((project) => !project.featured);
 
@@ -19,7 +17,7 @@ function Projects() {
                 <ul className="tag-list" aria-label="Technologies">
                     {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                 </ul>
-                <button className="text-link project-link" type="button" onClick={() => setSelectedProject(project.key)}>View case study <span>↗</span></button>
+                <Link className="text-link project-link" to={`/work/${project.slug}`}>View case study <span>↗</span></Link>
             </div>
         </article>
     );
@@ -33,7 +31,6 @@ function Projects() {
             <div className="featured-projects">{featured.map(renderProject)}</div>
             <div className="archive-heading"><p className="eyebrow">Earlier work</p><h3>Foundations that shaped how I build today.</h3></div>
             <div className="project-archive">{archive.map((project, index) => renderProject(project, index + featured.length))}</div>
-            {selectedProject && <ProjectDetail show card={selectedProject} closeAction={() => setSelectedProject(null)}/>}
         </section>
     );
 }

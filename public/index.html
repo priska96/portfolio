@@ -2,6 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      (function (location) {
+        if (location.search.slice(0, 2) !== "?/") return;
+        var decoded = location.search
+          .slice(2)
+          .split("&")
+          .map(function (part) { return part.replace(/~and~/g, "&"); })
+          .join("?");
+        window.history.replaceState(
+          null,
+          "",
+          location.pathname.replace(/\/$/, "") + "/" + decoded + location.hash
+        );
+      })(window.location);
+    </script>
     <link rel="icon" type="image/png" sizes="512x512" href="%PUBLIC_URL%/logo512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#18181b" />

@@ -9,6 +9,8 @@ const skillGroups = [
       "Redux",
       "Expo",
       "TypeScript",
+      "Tailwind CSS",
+      "Storybook",
       "Next.js",
       "Vite",
     ],

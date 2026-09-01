@@ -1,15 +1,25 @@
 // @ts-ignore CSS is bundled as a side-effect import by the build tool.
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Home from "./Home";
 import AboutMe from "./pages/about-me/AboutMe";
 import Experience from "./pages/experience/Experience";
 import Projects from "./pages/projects/Projects";
 import Contact from "./pages/contact/Contact";
+import ProjectDetail from "./pages/projects/ProjectDetail";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 
-function App() {
+function PortfolioHome() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    if (!location.hash) return;
+    window.requestAnimationFrame(() => {
+      document.querySelector(location.hash)?.scrollIntoView();
+    });
+  }, [location.hash]);
 
   return (
     <div className="site-shell">
@@ -18,14 +28,14 @@ function App() {
       </a>
       <header className="site-header">
         <nav className="site-nav" aria-label="Main navigation">
-          <a
+          <Link
             className="wordmark"
-            href="#home"
+            to="/#home"
             onClick={closeMenu}
             aria-label="Priska Kohnen, home"
           >
             Priska Kohnen
-          </a>
+          </Link>
           <button
             className="menu-toggle"
             type="button"
@@ -68,6 +78,16 @@ function App() {
         <a href="#home">Back to top ↑</a>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<PortfolioHome />} />
+      <Route path="/work/:slug" element={<ProjectDetail />} />
+      <Route path="*" element={<PortfolioHome />} />
+    </Routes>
   );
 }
 

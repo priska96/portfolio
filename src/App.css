@@ -8,13 +8,20 @@
   --green: #a3e635;
   --serif: "Playfair Display", serif;
   --mono: "DM Mono", monospace;
+  --type-display: clamp(3.25rem, 6.5vw, 6.2rem);
+  --type-page-title: clamp(2.5rem, 5.5vw, 4.8rem);
+  --type-section-title: clamp(2.35rem, 5vw, 4.5rem);
+  --type-subsection-title: clamp(1.85rem, 3.2vw, 3rem);
+  --type-card-title: clamp(1.45rem, 2.4vw, 2rem);
+  --type-eyebrow: 0.7rem;
+  --type-body-large: clamp(0.98rem, 1.5vw, 1.1rem);
 }
 .page-width {
   width: min(1180px, calc(100% - 2rem));
   margin-inline: auto;
 }
 .section {
-  padding: clamp(5rem, 9vw, 9rem) 0;
+  padding: clamp(3.75rem, 6.5vw, 6.5rem) 0;
 }
 .sr-only {
   position: absolute;
@@ -43,7 +50,7 @@
 .eyebrow {
   margin: 0 0 1rem;
   color: var(--violet);
-  font: 500 0.76rem/1.4 var(--mono);
+  font: 500 var(--type-eyebrow)/1.4 var(--mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -64,11 +71,11 @@ h2 {
 h2 {
   max-width: 760px;
   margin-bottom: 0;
-  font-size: clamp(2.6rem, 6vw, 5.7rem);
+  font-size: var(--type-section-title);
   line-height: 0.98;
 }
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: var(--type-card-title);
   letter-spacing: -0.025em;
   line-height: 1.1;
 }
@@ -137,7 +144,7 @@ textarea:focus-visible {
 }
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: min(860px, 88svh);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -165,14 +172,14 @@ textarea:focus-visible {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding-top: 8rem;
-  padding-bottom: 7rem;
+  padding-top: clamp(6rem, 9vh, 7rem);
+  padding-bottom: clamp(4rem, 7vh, 5.5rem);
 }
 .hero h1 {
-  max-width: 950px;
-  margin: 0 0 2rem;
-  font-size: clamp(3.25rem, 8vw, 7.8rem);
-  line-height: 0.88;
+  max-width: 900px;
+  margin: 0 0 1.5rem;
+  font-size: var(--type-display);
+  line-height: 0.92;
 }
 .hero h1 em {
   color: var(--green);
@@ -181,9 +188,9 @@ textarea:focus-visible {
 }
 .hero-intro {
   max-width: 690px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: var(--type-body-large);
 }
 .hero-actions {
   display: flex;
@@ -230,7 +237,7 @@ textarea:focus-visible {
 }
 .terminal {
   width: min(620px, 100%);
-  margin-top: 3rem;
+  margin-top: 2rem;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 10px;
   overflow: hidden;
@@ -290,7 +297,7 @@ textarea:focus-visible {
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.55fr);
   gap: 3rem;
   align-items: end;
-  margin-bottom: clamp(3rem, 7vw, 6rem);
+  margin-bottom: clamp(2rem, 4.5vw, 4rem);
 }
 .section-heading > p {
   margin: 0;
@@ -298,7 +305,7 @@ textarea:focus-visible {
 }
 .featured-projects {
   display: grid;
-  gap: clamp(1.75rem, 4vw, 3.5rem);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
 }
 .featured-projects .project-card {
   height: 500px;
@@ -461,7 +468,7 @@ textarea:focus-visible {
 }
 .archive-heading {
   max-width: 650px;
-  margin: 6rem 0 2.25rem;
+  margin: 4rem 0 2rem;
 }
 .project-archive {
   display: grid;
@@ -522,7 +529,7 @@ textarea:focus-visible {
   display: grid;
   grid-template-columns: 70px 190px 1fr;
   gap: 2rem;
-  padding: 3rem 0;
+  padding: clamp(2rem, 3.5vw, 2.75rem) 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 .timeline-marker span {
@@ -562,7 +569,8 @@ textarea:focus-visible {
 .about-section {
   display: grid;
   grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(3rem, 8vw, 8rem);
+  column-gap: clamp(3rem, 8vw, 8rem);
+  row-gap: clamp(1.25rem, 2.5vw, 2rem);
   align-items: center;
 }
 .about-portrait {
@@ -583,23 +591,23 @@ textarea:focus-visible {
   font: 0.72rem var(--mono);
 }
 .about-content h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
-.about-content > p {
+.about-content > p:not(.eyebrow) {
   color: var(--muted);
 }
 .about-content .about-lead {
   color: var(--ink);
-  font-size: 1.25rem;
+  font-size: var(--type-body-large);
   font-weight: 500;
 }
 .skills-panel {
   grid-column: 1/-1;
   display: grid;
   grid-template-columns: 0.7fr 1.3fr;
-  gap: 4rem;
-  margin-top: 3rem;
-  padding: clamp(2rem, 5vw, 4rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-top: 0;
+  padding: clamp(1.75rem, 3vw, 2.75rem) clamp(2rem, 5vw, 4rem);
   background: #eeebe4;
 }
 .skills-intro h3 {
@@ -608,7 +616,8 @@ textarea:focus-visible {
 .skill-groups {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 1.5rem;
 }
 .skill-group {
   border-top: 1px solid #cbc7bd;
@@ -627,7 +636,7 @@ textarea:focus-visible {
   font-size: 0.88rem;
 }
 .contact-section {
-  padding: clamp(5rem, 10vw, 10rem) 0;
+  padding: clamp(3.75rem, 7vw, 7rem) 0;
   background: var(--green);
 }
 .contact-grid {
@@ -643,7 +652,7 @@ textarea:focus-visible {
 }
 .contact-copy > p {
   max-width: 520px;
-  font-size: 1.1rem;
+  font-size: var(--type-body-large);
 }
 .contact-email {
   display: inline-flex;
@@ -692,7 +701,7 @@ textarea:focus-visible {
 }
 .modal-page h1 {
   margin: 1rem 0 3rem;
-  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-size: var(--type-page-title);
 }
 .btn-back {
   border: 0;
@@ -776,7 +785,8 @@ textarea:focus-visible {
     grid-column: 2;
   }
   .about-section {
-    gap: 3rem;
+    column-gap: 3rem;
+    row-gap: 1.5rem;
   }
   .skills-panel {
     grid-template-columns: 1fr;
@@ -821,7 +831,8 @@ textarea:focus-visible {
     );
   }
   .hero-content {
-    padding-top: 7rem;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
   }
   .section-heading {
     grid-template-columns: 1fr;
@@ -838,7 +849,7 @@ textarea:focus-visible {
     grid-template-columns: 1fr;
   }
   .archive-heading {
-    margin-top: 5rem;
+    margin-top: 3.5rem;
   }
   .timeline-item {
     grid-template-columns: 42px 1fr;
@@ -846,6 +857,7 @@ textarea:focus-visible {
   }
   .about-section {
     grid-template-columns: 1fr;
+    row-gap: 1.5rem;
   }
   .about-portrait {
     max-width: 420px;
@@ -876,16 +888,8 @@ textarea:focus-visible {
 }
 
 /* Editorial case studies */
-.case-modal {
-  z-index: 1200;
-}
-.case-modal .modal-dialog,
-.case-modal .modal-content {
-  margin: 0;
-  max-width: none;
-  min-height: 100%;
-  border: 0;
-  border-radius: 0;
+.case-page {
+  min-height: 100vh;
   background: var(--paper);
 }
 .case-nav {
@@ -914,6 +918,7 @@ textarea:focus-visible {
   color: #fff;
   font: 500 0.75rem var(--mono);
   cursor: pointer;
+  text-decoration: none;
 }
 .case-close span {
   display: inline-block;
@@ -935,7 +940,7 @@ textarea:focus-visible {
 .case-hero h1 {
   max-width: 800px;
   margin: 0;
-  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  font-size: var(--type-page-title);
   line-height: 0.98;
   letter-spacing: -0.045em;
 }
@@ -986,7 +991,7 @@ textarea:focus-visible {
   max-width: 900px;
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
-  font-size: clamp(0.98rem, 1.5vw, 1.1rem);
+  font-size: var(--type-body-large);
   line-height: 1.7;
 }
 .case-summary a {
@@ -1018,17 +1023,16 @@ textarea:focus-visible {
 }
 .case-story-heading h2 {
   max-width: 520px;
-  font-size: clamp(1.9rem, 3.35vw, 3.15rem);
+  font-size: var(--type-subsection-title);
   line-height: 1.02;
 }
 .case-story-heading .eyebrow {
   margin-bottom: 0.6rem;
-  font-size: 0.68rem;
 }
 .case-story-copy > p {
   margin-bottom: 1.4rem;
   color: var(--muted);
-  font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+  font-size: var(--type-body-large);
 }
 .case-story-copy ul {
   display: grid;
@@ -1180,12 +1184,30 @@ textarea:focus-visible {
   padding-bottom: 4rem;
   border-top: 1px solid var(--line);
 }
-.case-footer p {
-  margin: 0;
-  color: var(--muted);
-  font: 500 0.7rem var(--mono);
+.case-project-nav {
+  display: flex;
+  max-width: 46%;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.case-project-nav span {
+  color: var(--violet);
+  font: 500 0.68rem var(--mono);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+}
+.case-project-nav strong {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  line-height: 1.25;
+}
+.case-project-nav.next {
+  align-items: flex-end;
+  text-align: right;
+}
+.case-project-nav:hover strong {
+  color: var(--violet);
 }
 @media (max-width: 760px) {
   .case-nav > span {
@@ -1244,5 +1266,12 @@ textarea:focus-visible {
     align-items: flex-start;
     flex-direction: column;
     gap: 1.5rem;
+  }
+  .case-project-nav {
+    max-width: none;
+  }
+  .case-project-nav.next {
+    align-items: flex-start;
+    text-align: left;
   }
 }

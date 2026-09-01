@@ -57,6 +57,7 @@ import sciendisCardLinkCart from "../../images/sciendis-cardlink2.png";
 
 export interface ProjectCardData {
   key: string;
+  slug: string;
   title: string;
   context: string;
   summary: string;
@@ -107,6 +108,7 @@ export interface ProjectDetailData {
 export const projects: ProjectCardData[] = [
   {
     key: "sciendisPlatform",
+    slug: "wundera-healthcare-platform",
     title: "WUNDERA Healthcare Platform",
     context: "Web · Mobile · White label · sciendis",
     summary:
@@ -117,6 +119,8 @@ export const projects: ProjectCardData[] = [
       "React",
       "React Native",
       "Expo",
+      "Tailwind CSS",
+      "Storybook",
       "SQLite",
       "Vite",
       "Next.js",
@@ -128,6 +132,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "sciendisEgk",
+    slug: "expo-nfc-module",
     title: "Expo NFC Module",
     context: "WUNDERA native integration · sciendis",
     summary:
@@ -135,6 +140,7 @@ export const projects: ProjectCardData[] = [
     role: "Technical Owner · Native Mobile Developer",
     technologies: [
       "Expo",
+      "Expo Modules",
       "Swift",
       "C++",
       "Kotlin",
@@ -150,6 +156,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "sciendisCardlink",
+    slug: "online-pharmacy-cardlink",
     title: "Online Pharmacy & CardLink",
     context: "Independent pharmacy app · sciendis",
     summary:
@@ -170,6 +177,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "FMS",
+    slug: "fleet-management-system",
     title: "Fleet Management System",
     context: "Autonomous mobility · ThorDrive",
     summary:
@@ -183,6 +191,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "webVisualizer",
+    slug: "thordrive-webviz",
     title: "ThorDrive WebViz",
     context: "Autonomous mobility · ThorDrive",
     summary:
@@ -196,6 +205,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "lotti",
+    slug: "lotti-ai",
     title: "Lotti.ai",
     context: "AI-enabled education · Teclead Ventures",
     summary:
@@ -207,6 +217,7 @@ export const projects: ProjectCardData[] = [
       "Node.js",
       "OpenAI",
       "TypeScript",
+      "Tailwind CSS",
     ],
     image: lottiThumbnail,
     imageDisplay: "contain-full",
@@ -215,17 +226,26 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "theChagos",
+    slug: "the-chagos",
     title: "The Chagos",
     context: "Real-estate SaaS · Teclead Ventures",
     summary:
       "A typed full-stack SaaS platform developed from requirements to implementation, helping construction projects make more sustainable product decisions.",
     role: "Full-Stack Developer",
-    technologies: ["React", "Next.js", "Node.js", "tRPC", "Prisma"],
+    technologies: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "tRPC",
+      "Prisma",
+    ],
     image: chagosThumbnail,
     featured: false,
   },
   {
     key: "twotickets",
+    slug: "twotickets",
     title: "TwoTickets.de",
     context: "Culture platform · TwoTickets.de",
     summary:
@@ -237,6 +257,7 @@ export const projects: ProjectCardData[] = [
   },
   {
     key: "ngoWork",
+    slug: "ngo-human-rights-projects",
     title: "NGO & Human Rights Projects",
     context: "PSCORE · Education · Conferences",
     summary:
@@ -341,10 +362,13 @@ export const data: Record<string, ProjectDetailData> = {
       "React Native",
       "Expo",
       "Redux",
+      "Tailwind CSS",
+      "Storybook",
       "Kysely",
       "SQLite",
       "Strapi",
       "Vite",
+      "Next.js",
     ],
     sections: [
       {
@@ -359,6 +383,7 @@ export const data: Record<string, ProjectDetailData> = {
         points: [
           "Shared improvements could be released and adopted centrally through explicit package versions",
           "Each consuming application retained its product-specific branding, workflows and release cycle",
+          "Reusable Tailwind CSS components were developed and documented with Storybook",
           "Standardized repository, read/write and API integration patterns across products",
           "Defined technical standards and supported package adoption across product teams",
         ],
@@ -404,8 +429,10 @@ export const data: Record<string, ProjectDetailData> = {
     focus: ["Secure NFC", "Cross-platform native modules", "Patient workflows"],
     stack: [
       "Expo",
+      "Expo Modules",
       "React Native",
       "Swift",
+      "C++",
       "Kotlin",
       "PACE",
       "OpenHealthCardKit",
@@ -731,7 +758,15 @@ export const data: Record<string, ProjectDetailData> = {
     period: "2023–2024",
     role: "Full-Stack Developer & Consultant",
     focus: ["Requirements", "Typed architecture", "Sustainability workflows"],
-    stack: ["React", "Next.js", "Node.js", "tRPC", "Prisma", "Zod"],
+    stack: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "tRPC",
+      "Prisma",
+      "Zod",
+    ],
     sections: [
       {
         eyebrow: "Product flow",
@@ -772,7 +807,14 @@ export const data: Record<string, ProjectDetailData> = {
       "Accessible AI",
       "Product architecture",
     ],
-    stack: ["React Native", "Next.js", "Node.js", "TypeScript", "OpenAI"],
+    stack: [
+      "React Native",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "TypeScript",
+      "OpenAI",
+    ],
     sections: [
       {
         eyebrow: "Audience and product",
