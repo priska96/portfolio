@@ -42,10 +42,16 @@ import fmsThumbnail from "../../images/fms_small.png";
 import webVisualizerThumbnail from "../../images/webVisualizer_small2.png";
 import twoticketsThumbnail from "../../images/twotickets_small.png";
 import sciendisPharmacyCardLink from "../../images/sciendis-pharmacy-cardlink.mov";
-import sciendisNfc from "../../images/sciendis-nfc.mov";
 import sciendisWebAppDashboard from "../../images/sciendis-web-app1.png";
 import sciendisWebAppPatient from "../../images/sciendis-web-app2.png";
 import sciendisWebAppUsers from "../../images/sciendis-web-app3.png";
+import sciendisNfcIntegration from "../../images/sciendis-integration-nfc-module.mov";
+import sciendisNfcScan from "../../images/sciendis-nfc-module-integration1.png";
+import sciendisNfcResult from "../../images/sciendis-nfc-module-integration2.png";
+import sciendisMobileApp from "../../images/sciendis-mobile-app.mov";
+import sciendisMobileDashboard from "../../images/sciendis-mobile-app1.png";
+import sciendisMobilePatient from "../../images/sciendis-mobile-app2.png";
+import sciendisMobileWound from "../../images/sciendis-mobile-app3.png";
 
 export interface ProjectCardData {
   key: string;
@@ -55,6 +61,7 @@ export interface ProjectCardData {
   role: string;
   technologies: string[];
   image?: string;
+  visualWords?: string[];
   featured: boolean;
 }
 
@@ -70,12 +77,24 @@ export interface ExperienceData {
 export interface ProjectDetailData {
   imgs?: string[];
   imgTitle?: string[];
+  mobileImgs?: string[];
+  mobileImgTitle?: string[];
   vids?: string[];
   mobileVids?: string[];
   poster?: string[];
   vidTitle?: string[];
   cardTitle: string;
   cardText: string;
+  period?: string;
+  role?: string;
+  focus?: string[];
+  stack?: string[];
+  sections?: Array<{
+    eyebrow: string;
+    title: string;
+    body: string;
+    points?: string[];
+  }>;
   buttonWebsite?: string;
   buttonCode?: string;
   buttonAffiliate?: string;
@@ -83,37 +102,44 @@ export interface ProjectDetailData {
 
 export const projects: ProjectCardData[] = [
   {
-    key: "sciendis",
-    title: "Healthcare product ecosystem at sciendis",
-    context: "Healthcare · 2024–2026",
+    key: "sciendisPlatform",
+    title: "WUNDERA Healthcare Platform",
+    context: "Web · Mobile · White label · sciendis",
     summary:
-      "My biggest professional milestone so far: a shared platform architecture for WUNDERA®, Wundumsorglos® and customer-specific white-label healthcare applications.",
-    role: "Senior Frontend Developer & Frontend Team Lead",
-    technologies: [
-      "React",
-      "React Native",
-      "Redux",
-      "Expo",
-      "Next.js",
-      "Vite",
-      "Swift",
-      "C++",
-      "Kotlin",
-      "PACE",
-      "Cryptography",
-    ],
+      "Compatible WUNDERA® web and mobile products forming the foundation for white-label healthcare solutions, including native eGK workflows.",
+    role: "Senior Frontend Developer · Frontend Team Lead",
+    technologies: ["TypeScript", "React", "React Native", "Expo", "SQLite", "Vite"],
     image: sciendisWebAppDashboard,
     featured: true,
   },
   {
-    key: "webVisualizer",
-    title: "ThorDrive WebViz",
-    context: "Autonomous mobility · ThorDrive",
+    key: "sciendisEgk",
+    title: "Expo FHC NFC Module",
+    context: "WUNDERA native integration · sciendis",
     summary:
-      "A browser-based engineering interface that turned complex ROS workflows into practical tools for testing and operating autonomous vehicles.",
-    role: "Software Engineer",
-    technologies: ["React", "Python", "C++", "ROS", "rosbridge"],
-    image: webVisualizerThumbnail,
+      "A native module integrated into WUNDERA Mobile for securely reading German electronic health cards through Swift and Kotlin.",
+    role: "Technical Owner · Native Mobile Developer",
+    technologies: [
+      "Expo",
+      "Swift",
+      "C++",
+      "Kotlin",
+      "NFC",
+      "PACE",
+      "Cryptography",
+    ],
+    visualWords: ["Read", "Secure", "Connect"],
+    featured: true,
+  },
+  {
+    key: "sciendisCardlink",
+    title: "Online Pharmacy & CardLink",
+    context: "Independent pharmacy app · sciendis",
+    summary:
+      "An independent Expo pharmacy app with a local native CardLink module built directly as part of the application codebase.",
+    role: "Technical Project Owner · Mobile Developer",
+    technologies: ["Expo Modules", "React Native", "WebView", "Swift", "Android", "FHIR"],
+    visualWords: ["Web", "Native", "eRx"],
     featured: true,
   },
   {
@@ -125,6 +151,17 @@ export const projects: ProjectCardData[] = [
     role: "Frontend Lead Developer",
     technologies: ["React", "React Native", "Java", "Leaflet", "Redis", "ROS"],
     image: fmsThumbnail,
+    featured: true,
+  },
+  {
+    key: "webVisualizer",
+    title: "ThorDrive WebViz",
+    context: "Autonomous mobility · ThorDrive",
+    summary:
+      "A browser-based engineering interface that turned complex ROS workflows into practical tools for testing and operating autonomous vehicles.",
+    role: "Software Engineer",
+    technologies: ["React", "Python", "C++", "ROS", "rosbridge"],
+    image: webVisualizerThumbnail,
     featured: true,
   },
   {
@@ -177,12 +214,9 @@ export const experience: ExperienceData[] = [
     description:
       "My biggest professional milestone so far: leading frontend delivery across sciendis’ own healthcare products and customer-specific white-label solutions while remaining hands-on in architecture, web, mobile and native development.",
     highlights: [
-      "Led technical planning, task prioritization, delegation, code reviews and mentoring across time zones",
-      "Established a TypeScript monorepo and central component library so WUNDERA®, Wundumsorglos® and white-label customer applications could share web, mobile, data and API foundations without duplicating code",
-      "Built secure eGK NFC functionality with Swift, Kotlin, PACE authentication, cryptographic key exchange and gematik’s OpenHealthCardKit",
-      "Modernized the mobile architecture from Expo SDK 51 to 53 and migrated local persistence to expo-sqlite",
-      "Developed an Expo online-pharmacy app with WebView and native CardLink SDK integration for electronic prescriptions",
-      "Supported releases, resolved production-critical issues and communicated directly with healthcare clients on complex technical questions",
+      "Led frontend architecture, planning, reviews and mentoring across healthcare web and mobile products",
+      "Built a shared TypeScript platform for WUNDERA®, Wundumsorglos® and white-label customer solutions",
+      "Owned native Gematik integrations spanning eGK NFC, PACE and CardLink from concept to production",
     ],
   },
   {
@@ -193,13 +227,9 @@ export const experience: ExperienceData[] = [
     description:
       "Combined hands-on software development with management consulting in a company delivering architecture, technology coaching and digital products for enterprise clients. My work covered requirements, implementation and software architecture across real-estate SaaS and AI-enabled education.",
     highlights: [
-      "Advised on software-development requirements and translated changing product needs into practical implementation plans",
-      "Contributed to the conception and implementation of web, mobile and full-stack software architecture",
-      "Worked with Node.js and Next.js across typed full-stack applications",
-      "Developed dynamic UI components, tRPC APIs and Prisma database schemas for a real-estate SaaS platform",
-      "Integrated OpenAI APIs to generate learning materials for an AI-powered education product",
-      "Independently built the complementary React Native mobile application from the ground up",
-      "Supported team-building activities and collaborated professionally with managers, developers and customers",
+      "Translated product and consulting requirements into typed web, mobile and full-stack architectures",
+      "Built React/Next.js features and APIs for a real-estate sustainability platform",
+      "Independently designed and delivered Lotti’s React Native application from the ground up",
     ],
   },
   {
@@ -208,12 +238,11 @@ export const experience: ExperienceData[] = [
     location: "Seoul",
     title: "Software Engineer",
     description:
-      "An important stepping stone into React and React Native development, working at the intersection of frontend engineering and autonomous systems.",
+      "Built engineering and operational interfaces at the intersection of frontend development, mobile workflows and autonomous systems.",
     highlights: [
-      "Extended a WebViz-based React, Python and C++ application with visualization for custom ROS messages",
-      "Built interfaces for rosbag record/play, software updates and sending ROS commands directly to test vehicles",
       "Led frontend development of a fleet management system for autonomous airport luggage vehicles",
-      "Developed a complementary React Native app for airport ground workers to manage vehicle work orders",
+      "Built the complementary React Native workflows used by airport ground workers",
+      "Connected browser-based React tooling with Python/C++ ROS services for vehicle testing",
     ],
   },
   {
@@ -224,32 +253,162 @@ export const experience: ExperienceData[] = [
     description:
       "Developed and maintained the frontend and backend of a Germany-wide event calendar and city-explorer club. The role also included UI implementation, quality assurance, recruiting support and ten months of independent remote work from abroad.",
     highlights: [
-      "Developed and maintained frontend and backend solutions with Python and Django",
-      "Co-designed and implemented interfaces with HTML, SCSS and JavaScript, including landing pages, event pages, search and filtering",
-      "Participated in quality assurance and helped maintain reliable releases",
-      "Completed a full technology-stack upgrade",
-      "Supported staff interviews and trained new employees",
-      "Worked remotely and independently from abroad for ten months in 2020",
+      "Developed and modernized the Django/PostgreSQL platform across frontend and backend",
+      "Redesigned core discovery, event and affiliate experiences with HTML, SCSS and JavaScript",
+      "Contributed to QA, recruiting and onboarding while working independently across locations",
     ],
   },
 ];
 
 export const data: Record<string, ProjectDetailData> = {
-  sciendis: {
+  sciendisPlatform: {
     imgs: [sciendisWebAppDashboard, sciendisWebAppPatient, sciendisWebAppUsers],
     imgTitle: [
-      "Wundera web app - dashboard and analytics",
+      "WUNDERA dashboard and analytics",
       "Digital patient record",
       "User and license management",
     ],
-    mobileVids: [sciendisNfc, sciendisPharmacyCardLink],
-    vidTitle: [
-      "Reading a German electronic health card via NFC and creating patient, wound and wound report entries",
-      "Retrieving an electronic prescription via CardLink",
+    mobileImgs: [
+      sciendisMobileDashboard,
+      sciendisMobilePatient,
+      sciendisMobileWound,
     ],
-    cardTitle: "Healthcare product ecosystem at sciendis",
+    mobileImgTitle: [
+      "Mobile dashboard and synchronization status",
+      "Mobile patient and wound overview",
+      "Mobile wound-report workflow",
+    ],
+    mobileVids: [sciendisMobileApp],
+    poster: [sciendisMobileDashboard],
+    vidTitle: ["WUNDERA mobile healthcare workflows"],
+    cardTitle: "WUNDERA Healthcare Platform",
     cardText:
-      "Sciendis develops and operates digital healthcare products such as WUNDERA® and Wundumsorglos®, as well as customer-specific solutions for established companies in healthcare and nursing. The product landscape includes cloud-based web and mobile applications built with technologies including React, Next.js and Vite that digitize patient, wound-care, staffing, order and supply workflows. WUNDERA® was available as a React web platform with a compatible React Native mobile application, and its foundations were also used to deliver individually branded white-label solutions for enterprise customers.<br/><br/>As Senior Frontend Developer and Frontend Team Lead, I was responsible for frontend architecture, technical standards and central modules across this product ecosystem. I designed an internal TypeScript monorepo and a shared component library so the company's own products and customer applications could reuse the same React and React Native components instead of duplicating implementations. The shared foundation also included a Kysely-based SQLite data layer with standardized repository and read/write operations, plus a generic REST integration for the Strapi CMS. This made product variants easier to maintain while preserving consistent behavior and allowing customer-specific customization.<br/><br/>Across the React and React Native applications, I worked with Redux for predictable shared state management and Redux Persist where application state needed to survive restarts. For the WUNDERA® mobile application, I upgraded Expo SDK 51 to 53, resolved the resulting migration issues and moved the structured local data layer to expo-sqlite for more reliable offline access. Redux Persist and expo-sqlite served different persistence needs: durable application state on one side and structured domain data on the other.<br/><br/>I also expanded into native Swift and Kotlin development while implementing secure cross-platform NFC communication with German electronic health cards. This included PACE authentication, cryptographic key exchange and gematik's OpenHealthCardKit. In an online-pharmacy project, I took substantial technical responsibility from conception through production integration and implemented native CardLink functionality for retrieving electronic prescriptions. Alongside product development and team leadership, I supported releases, investigated production-critical issues and communicated directly with customers on complex technical questions.",
+      "Sciendis develops WUNDERA® as compatible web and mobile applications for patient, wound-care, staffing, order and supply workflows. WUNDERA also provided the product foundation for individually branded white-label solutions, while Wundumsorglos® and other customer applications reused parts of the same shared platform.",
+    period: "2024–2026",
+    role: "Frontend Team Lead · Architecture Owner",
+    focus: ["Web and mobile", "White-label platform", "Frontend architecture", "Synchronization"],
+    stack: [
+      "TypeScript",
+      "React",
+      "React Native",
+      "Expo",
+      "Redux",
+      "Kysely",
+      "SQLite",
+      "Strapi",
+      "Vite",
+    ],
+    sections: [
+      {
+        eyebrow: "Challenge",
+        title: "One product foundation, multiple branded solutions",
+        body: "WUNDERA’s web and mobile applications formed the basis for individually branded white-label products. The variants shared healthcare workflows, interface components, data-access patterns and CMS integrations, but still needed room for customer-specific behavior and presentation.",
+      },
+      {
+        eyebrow: "Approach",
+        title: "A shared TypeScript platform",
+        body: "I established an internal monorepo with shared React and React Native component libraries, Kysely-based SQLite repositories and a reusable REST integration for Strapi. Product teams could build on consistent foundations while retaining customer-specific customization.",
+        points: [
+          "Defined central frontend architecture and technical standards",
+          "Standardized repository and read/write operations",
+          "Led planning, reviews and mentoring across the frontend team",
+          "Supported releases, production issues and technical client communication",
+        ],
+      },
+      {
+        eyebrow: "Web and mobile",
+        title: "Compatible products with different data needs",
+        body: "The React web application consumed server data directly. The React Native application needed structured local data and synchronization so healthcare workflows remained dependable on mobile devices. I generalized the synchronization layer so repositories followed consistent read, write and synchronization patterns.",
+      },
+      {
+        eyebrow: "Modernization",
+        title: "Updating the application foundations",
+        body: "I upgraded Expo SDK 51 to 53, resolved the resulting compatibility issues and migrated structured local persistence to expo-sqlite. Redux and Redux Persist handled durable application state separately from the SQLite domain data. I also migrated a web application from Next.js to Vite.",
+      },
+      {
+        eyebrow: "Native extension",
+        title: "Integrating electronic health-card workflows",
+        body: "The WUNDERA mobile application also integrated the Expo FHC NFC module I developed. It allowed patient information to be read securely from German electronic health cards and transferred into WUNDERA’s patient and wound-care workflows.",
+      },
+    ],
+  },
+  sciendisEgk: {
+    mobileImgs: [sciendisNfcScan, sciendisNfcResult],
+    mobileImgTitle: [
+      "Native NFC prompt ready to scan an electronic health card",
+      "Patient form populated with data read from the electronic health card",
+    ],
+    mobileVids: [sciendisNfcIntegration],
+    poster: [sciendisNfcScan],
+    vidTitle: [
+      "Integrating the cross-platform Expo NFC module into the healthcare application",
+    ],
+    cardTitle: "Expo FHC NFC Module",
+    cardText:
+      "Integrated into the WUNDERA mobile application, the module replaces manual patient-data entry by reading German electronic health cards securely and making validated data available to patient and wound-care workflows.",
+    period: "2024–2026",
+    role: "Technical Owner · Native Mobile Developer",
+    focus: ["Secure NFC", "Cross-platform native modules", "Patient workflows"],
+    stack: [
+      "Expo",
+      "React Native",
+      "Swift",
+      "Kotlin",
+      "PACE",
+      "OpenHealthCardKit",
+    ],
+    sections: [
+      {
+        eyebrow: "Technical challenge",
+        title: "One Expo API across two native implementations",
+        body: "Expo did not provide the required secure eGK functionality. I designed a consistent JavaScript-facing module API while implementing the platform-specific NFC and cryptographic work natively.",
+      },
+      {
+        eyebrow: "Implementation",
+        title: "OpenHealthCardKit on iOS, PACE on Android",
+        body: "On iOS, I integrated gematik’s OpenHealthCardKit in Swift. On Android, I implemented PACE authentication, cryptographic key exchange and secure NFC communication in Kotlin. I took substantial technical ownership from conception through productive integration.",
+      },
+    ],
+  },
+  sciendisCardlink: {
+    mobileVids: [sciendisPharmacyCardLink],
+    vidTitle: ["Retrieving an electronic prescription through CardLink"],
+    cardTitle: "Online Pharmacy & CardLink",
+    cardText:
+      "This independent Expo application brought an existing web-based pharmacy shop to mobile and added native electronic-prescription functionality without rebuilding the shop as a native user interface.",
+    period: "2024–2026",
+    role: "Technical Project Owner · Mobile Developer",
+    focus: [
+      "Web/native integration",
+      "Local Expo module architecture",
+      "Electronic prescriptions",
+      "Healthcare interoperability",
+    ],
+    stack: [
+      "Expo",
+      "React Native WebView",
+      "Swift",
+      "Android",
+      "CardLink",
+      "FHIR",
+    ],
+    sections: [
+      {
+        eyebrow: "Architecture",
+        title: "Extending an existing shop across the web/native boundary",
+        body: "I embedded the shop in a React Native WebView and implemented communication between the web application and native application code using injected JavaScript and WebView message events. This preserved the established shop while allowing it to request native CardLink operations.",
+      },
+      {
+        eyebrow: "Native integration",
+        title: "From CardLink to application-ready prescription data",
+        body: "I connected the CardLink SDK through native Swift and Android modules. Prescription data returned as FHIR XML was parsed and transformed into a simplified JSON structure for further processing by the application. I accompanied the solution from conception through production integration.",
+      },
+      {
+        eyebrow: "Module architecture",
+        title: "Native module and application built together",
+        body: "The custom Expo module lives directly inside the pharmacy application’s codebase. It is compiled together with the iOS and Android app instead of being published and installed as a separate npm package. This kept the CardLink bridge versioned with the product that consumes it and made native changes part of the same build and release process.",
+      },
+    ],
   },
   nutritionplanner: {
     vids: [nutritionplanner],
@@ -360,6 +519,22 @@ export const data: Record<string, ProjectDetailData> = {
     cardTitle: "TwoTickets.de",
     cardText:
       "TwoTickets.de is a Germany-wide event calendar and city-explorer club that helps members discover new cultural, entertainment and sporting events and experience them in pairs. As a Full-Stack Web Developer, I developed and maintained frontend and backend solutions based on Python, Django and PostgreSQL. I co-designed and implemented the user interface with HTML, SCSS and JavaScript, including redesigned landing and event pages, improved search and filtering and an adapted affiliate experience for Vattenfall. I also participated in quality assurance and completed a full technology-stack upgrade.<br/><br/>Beyond product development, I supported staff interviews and trained new employees. During a ten-month stay abroad in 2020, I continued working for the company remotely and independently, taking responsibility for delivering my work across locations and time zones.",
+    period: "2017–2021",
+    role: "Full-Stack Web Developer",
+    focus: ["Platform modernization", "UI redesign", "Quality assurance"],
+    stack: ["Python", "Django", "PostgreSQL", "JavaScript", "SCSS"],
+    sections: [
+      {
+        eyebrow: "Platform work",
+        title: "Modernizing event discovery across the stack",
+        body: "I developed and maintained the Django/PostgreSQL platform across frontend and backend, redesigned core landing and event experiences and improved search and filtering. I also adapted the affiliate experience for Vattenfall and completed a full technology-stack upgrade.",
+      },
+      {
+        eyebrow: "Beyond delivery",
+        title: "Quality, onboarding and independent remote work",
+        body: "My role also included quality assurance, supporting staff interviews and training new employees. During a ten-month stay abroad in 2020, I continued delivering independently across locations and time zones.",
+      },
+    ],
     buttonAffiliate: "https://vattenfall.de/freikarten",
   },
   webVisualizer: {
@@ -368,7 +543,23 @@ export const data: Record<string, ProjectDetailData> = {
     vidTitle: ["rosbag record", "rosbag play", "Version Manager"],
     cardTitle: "ThorDrive WebViz",
     cardText:
-      "ThorDrive WebViz made complex autonomous-vehicle testing workflows accessible through a browser-based engineering interface. Building on the open-source WebViz platform, I added visualization for custom ROS messages and created GUI panels for rosbag record and play workflows, version updates and commands sent directly to test vehicles. The React frontend communicated with ROS through rosbridge, supported by Python and C++ services. This project was an important stepping stone into deeper React development while allowing me to apply my previous full-stack experience in an autonomous-systems environment.",
+      "ThorDrive WebViz made complex autonomous-vehicle testing workflows accessible through a browser-based engineering interface. The project combined a React engineering UI with Python and C++ ROS services so vehicle-testing tasks could be operated without relying solely on terminal workflows.",
+    period: "2021–2023",
+    role: "Software Engineer",
+    focus: ["Engineering tooling", "ROS workflows", "Vehicle testing"],
+    stack: ["React", "Python", "C++", "ROS", "rosbridge"],
+    sections: [
+      {
+        eyebrow: "Challenge",
+        title: "Turning ROS workflows into practical browser tools",
+        body: "Autonomous-vehicle engineers depended on ROS messages, commands and rosbag tooling during testing. I extended the WebViz-based interface so these workflows could be understood and operated through purpose-built panels.",
+      },
+      {
+        eyebrow: "My contribution",
+        title: "A frontend connected to the robotics stack",
+        body: "I visualized custom ROS messages and built interfaces for rosbag recording and playback, software updates and commands sent directly to test vehicles. React communicated through rosbridge with supporting Python and C++ services.",
+      },
+    ],
     buttonCode: "https://github.com/cruise-automation/webviz",
   },
   FMS: {
@@ -396,6 +587,34 @@ export const data: Record<string, ProjectDetailData> = {
     cardTitle: "Fleet Management System",
     cardText:
       "ThorDrive’s Fleet Management System supported the daily operation of autonomous airport luggage vehicles. I led frontend development of the React application, which monitored vehicle health, location and work orders and provided administration tools for vehicles, workspaces, map zones and notifications. I implemented map interactions with Leaflet, worked with Redis for fast operational data access and integrated the frontend with a Java Spring Boot backend. I also developed the complementary React Native application used by airport ground workers to issue, start and complete vehicle work orders. Together, the web and mobile products turned autonomous-system data into practical operational workflows.",
+    period: "2021–2023",
+    role: "Frontend Lead Developer",
+    focus: ["Frontend ownership", "Fleet operations", "Web and mobile"],
+    stack: [
+      "React",
+      "React Native",
+      "Leaflet",
+      "Redis",
+      "Java Spring Boot",
+      "ROS",
+    ],
+    sections: [
+      {
+        eyebrow: "Operational problem",
+        title: "Making autonomous fleets usable day to day",
+        body: "Airport teams needed more than raw vehicle data: they needed monitoring, administration and work-order workflows that fit daily ground operations. The system translated autonomous-vehicle state into a practical product for both control-room and field users.",
+      },
+      {
+        eyebrow: "Web application",
+        title: "Frontend leadership for fleet monitoring",
+        body: "I led frontend development of the React application for vehicle health, location and work orders. I implemented Leaflet map interactions and administration tools for vehicles, workspaces, map zones and notifications, integrating with a Java Spring Boot backend and Redis-backed operational data.",
+      },
+      {
+        eyebrow: "Mobile application",
+        title: "Work orders in the hands of ground workers",
+        body: "I developed the complementary React Native application used by airport ground workers to issue, start and complete vehicle work orders. The mobile workflows connected field activity with the same fleet operation managed through the web product.",
+      },
+    ],
     buttonCode: "",
   },
   theChagos: {
@@ -408,6 +627,22 @@ export const data: Record<string, ProjectDetailData> = {
     cardTitle: "The Chagos",
     cardText:
       "The Chagos is a real-estate SaaS platform that helps interior construction projects evaluate product decisions against ESG goals. Within Teclead Ventures’ consulting and software-delivery environment, I supported the product from requirements and architecture through implementation. I developed dynamic React and Next.js interfaces, tRPC APIs and Prisma database schemas for project configuration, product selection and sustainability analysis. I also built administrative workflows for managing products and producers, with form validation through Zod. The work combined customer and product requirements with a typed full-stack architecture and practical implementation.",
+    period: "2023–2024",
+    role: "Full-Stack Developer & Consultant",
+    focus: ["Requirements", "Typed architecture", "Sustainability workflows"],
+    stack: ["React", "Next.js", "Node.js", "tRPC", "Prisma", "Zod"],
+    sections: [
+      {
+        eyebrow: "Product flow",
+        title: "From project configuration to an actionable ESG plan",
+        body: "The platform helped interior construction projects evaluate products against sustainability goals. I developed the flow from project configuration and product selection through sustainability analysis and the resulting action plan.",
+      },
+      {
+        eyebrow: "My contribution",
+        title: "Requirements translated into a typed full-stack system",
+        body: "Within Teclead’s consulting environment, I supported requirements and architecture as well as implementation. I built dynamic React/Next.js interfaces, tRPC APIs, Prisma schemas and Zod-validated administrative workflows for products and producers.",
+      },
+    ],
     buttonCode: "",
   },
   lotti: {
@@ -429,6 +664,26 @@ export const data: Record<string, ProjectDetailData> = {
     cardTitle: "Lotti.ai - Die KI für Ü50",
     cardText:
       "Lotti is an AI-powered education product designed to help people over 50 navigate digital topics with confidence. The experience combines approachable conversations, suggested questions, follow-up prompts, speech-to-text and guided topic exploration. Working across consulting, requirements and implementation, I independently conceived and developed the complementary React Native application from the ground up, including its architecture, push notifications and mobile interaction patterns. I also contributed to the React and Next.js web product and integrated OpenAI APIs to generate helpful, motivating learning experiences.",
+    period: "2023–2024",
+    role: "React Native Lead Developer",
+    focus: [
+      "Independent mobile delivery",
+      "Accessible AI",
+      "Product architecture",
+    ],
+    stack: ["React Native", "Next.js", "Node.js", "TypeScript", "OpenAI"],
+    sections: [
+      {
+        eyebrow: "Audience and product",
+        title: "Making digital topics approachable through conversation",
+        body: "Lotti helps people over 50 navigate digital life through approachable conversations, suggested questions, follow-up prompts, speech-to-text and guided topic exploration.",
+      },
+      {
+        eyebrow: "Mobile ownership",
+        title: "Designed and built independently from the ground up",
+        body: "I conceived and developed the complementary React Native application, including its architecture, mobile interaction patterns, push notifications and speech-to-text experience. I also contributed to the React/Next.js product and integrated OpenAI APIs for generated learning materials.",
+      },
+    ],
     buttonCode: "",
   },
 };

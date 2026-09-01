@@ -18,10 +18,12 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
     if (!detail) return null;
 
     const images = detail.imgs ?? [];
+    const mobileImages = detail.mobileImgs ?? [];
     const videos = detail.vids ?? [];
     const mobileVideos = detail.mobileVids ?? [];
-    const hasMedia = images.length + videos.length + mobileVideos.length > 0;
+    const hasMedia = images.length + mobileImages.length + videos.length + mobileVideos.length > 0;
     const hasActions = Boolean(detail.buttonCode || detail.buttonWebsite || detail.buttonAffiliate);
+    const hasMeta = Boolean(detail.period || detail.role || detail.focus?.length || detail.stack?.length);
 
     const imageTitle = (src: string, index: number) => {
         if (detail.imgTitle?.[index]) return detail.imgTitle[index];
@@ -53,6 +55,12 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                     <div className="page-width case-hero-inner">
                         <p className="eyebrow light">Selected work</p>
                         <h1>{detail.cardTitle}</h1>
+                        {hasMeta && <dl className="case-meta">
+                            {detail.role && <div><dt>Role</dt><dd>{detail.role}</dd></div>}
+                            {detail.focus?.length && <div><dt>Focus</dt><dd>{detail.focus.join(' · ')}</dd></div>}
+                            {detail.stack?.length && <div><dt>Stack</dt><dd>{detail.stack.join(' · ')}</dd></div>}
+                            {detail.period && <div><dt>Period</dt><dd>{detail.period}</dd></div>}
+                        </dl>}
                         <div className={`case-summary ${hasActions ? 'has-actions' : ''}`}>
                             <p>{parse(detail.cardText)}</p>
                             {hasActions && <div className="case-actions">
@@ -63,6 +71,23 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                         </div>
                     </div>
                 </header>
+
+                {detail.sections?.length && <section className="case-story page-width" aria-label="Case study details">
+                    {detail.sections.map((section, index) => (
+                        <article className="case-story-section" key={`${section.title}-${index}`}>
+                            <div className="case-story-heading">
+                                <p className="eyebrow">{section.eyebrow}</p>
+                                <h2>{section.title}</h2>
+                            </div>
+                            <div className="case-story-copy">
+                                <p>{section.body}</p>
+                                {section.points?.length && <ul>
+                                    {section.points.map((point) => <li key={point}>{point}</li>)}
+                                </ul>}
+                            </div>
+                        </article>
+                    ))}
+                </section>}
 
                 <section className="case-media page-width" aria-label="Project media">
                     {!hasMedia && (
@@ -88,6 +113,15 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                         <button className="case-media-item case-image" type="button" key={src} onClick={() => openLightbox(index)}>
                             <img src={src} alt={imageTitle(src, index)} loading="lazy"/>
                             <span className="case-image-label"><i>{String(index + 1).padStart(2, '0')}</i> {imageTitle(src, index)} <b>↗</b></span>
+                        </button>
+                    ))}
+                    </div>}
+
+                    {mobileImages.length > 0 && <div className="case-mobile-image-grid">
+                    {mobileImages.map((src, index) => (
+                        <button className="case-media-item case-image case-mobile-image" type="button" key={src} onClick={() => openLightbox(images.length + index)}>
+                            <img src={src} alt={detail.mobileImgTitle?.[index] ?? imageTitle(src, index)} loading="lazy"/>
+                            <span className="case-image-label"><i>{String(index + 1).padStart(2, '0')}</i> {detail.mobileImgTitle?.[index] ?? imageTitle(src, index)} <b>↗</b></span>
                         </button>
                     ))}
                     </div>}

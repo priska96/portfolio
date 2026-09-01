@@ -24,7 +24,7 @@ export default function LightBoxWrapper(props: LightBoxWrapperProps)  {
     },[props.isOpen])
 
     React.useEffect(()=>{
-        if(props.card.imgs && props.card.imgs.length > 0) setImages(props.card.imgs);
+        setImages([...(props.card.imgs ?? []), ...(props.card.mobileImgs ?? [])]);
     },[props.card])
 
 

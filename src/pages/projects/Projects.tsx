@@ -10,7 +10,7 @@ function Projects() {
     const renderProject = (project: ProjectCardData, index: number) => (
         <article className={`project-card ${!project.image ? 'project-card-text' : ''}`} key={project.key}>
             <div className="project-number">0{index + 1}</div>
-            {project.image ? <img src={project.image} alt="" loading="lazy"/> : <div className="healthcare-visual" aria-hidden="true"><span>Care</span><span>Code</span><span>Connect</span></div>}
+            {project.image ? <img src={project.image} alt="" loading="lazy"/> : <div className="healthcare-visual" aria-hidden="true">{(project.visualWords ?? ['Care', 'Code', 'Connect']).map((word) => <span key={word}>{word}</span>)}</div>}
             <div className="project-copy">
                 <p className="eyebrow">{project.context}</p>
                 <h3>{project.title}</h3>
