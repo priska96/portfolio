@@ -21,6 +21,18 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
     const videos = detail.vids ?? [];
     const mobileVideos = detail.mobileVids ?? [];
     const hasMedia = images.length + videos.length + mobileVideos.length > 0;
+    const hasActions = Boolean(detail.buttonCode || detail.buttonWebsite || detail.buttonAffiliate);
+
+    const imageTitle = (src: string, index: number) => {
+        if (detail.imgTitle?.[index]) return detail.imgTitle[index];
+
+        const filename = decodeURIComponent(src.split('/').pop() ?? '')
+            .replace(/\.[a-f0-9]{8,}(?=\.)/i, '')
+            .replace(/\.[^.]+$/, '')
+            .replace(/[-_]+/g, ' ')
+            .trim();
+        return filename ? filename.replace(/^./, (letter) => letter.toUpperCase()) : `${detail.cardTitle} interface ${index + 1}`;
+    };
 
     const openLightbox = (index: number) => {
         setSrcIndex(index);
@@ -41,13 +53,13 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                     <div className="page-width case-hero-inner">
                         <p className="eyebrow light">Selected work</p>
                         <h1>{detail.cardTitle}</h1>
-                        <div className="case-summary">
+                        <div className={`case-summary ${hasActions ? 'has-actions' : ''}`}>
                             <p>{parse(detail.cardText)}</p>
-                            <div className="case-actions">
+                            {hasActions && <div className="case-actions">
                                 {detail.buttonCode && <a className="button button-primary" href={detail.buttonCode} target="_blank" rel="noopener noreferrer">View code ↗</a>}
                                 {detail.buttonWebsite && <a className="text-link light" href={detail.buttonWebsite} target="_blank" rel="noopener noreferrer">Visit website <span>↗</span></a>}
                                 {detail.buttonAffiliate && <a className="text-link light" href={detail.buttonAffiliate} target="_blank" rel="noopener noreferrer">Affiliate website <span>↗</span></a>}
-                            </div>
+                            </div>}
                         </div>
                     </div>
                 </header>
@@ -59,6 +71,7 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                         </div>
                     )}
 
+                    {videos.length > 0 && <div className="case-video-grid">
                     {videos.map((src, index) => (
                         <figure className="case-media-item case-video" key={src}>
                             <video poster={detail.poster?.[index]} controls preload="metadata">
@@ -68,14 +81,18 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                             <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{detail.vidTitle?.[index] ?? 'Product walkthrough'}</figcaption>
                         </figure>
                     ))}
+                    </div>}
 
+                    {images.length > 0 && <div className="case-image-grid">
                     {images.map((src, index) => (
                         <button className="case-media-item case-image" type="button" key={src} onClick={() => openLightbox(index)}>
-                            <img src={src} alt={detail.imgTitle?.[index] ?? `${detail.cardTitle} interface ${index + 1}`} loading="lazy"/>
-                            <span className="case-image-label"><i>{String(index + 1).padStart(2, '0')}</i> {detail.imgTitle?.[index] ?? 'View image'} <b>↗</b></span>
+                            <img src={src} alt={imageTitle(src, index)} loading="lazy"/>
+                            <span className="case-image-label"><i>{String(index + 1).padStart(2, '0')}</i> {imageTitle(src, index)} <b>↗</b></span>
                         </button>
                     ))}
+                    </div>}
 
+                    {mobileVideos.length > 0 && <div className="case-mobile-video-grid">
                     {mobileVideos.map((src, index) => (
                         <figure className="case-media-item case-video case-mobile-video" key={src}>
                             <video poster={detail.poster?.[index]} controls preload="metadata">
@@ -85,6 +102,7 @@ export default function ProjectDetail({show, card, closeAction}: ProjectDetailPr
                             <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{detail.vidTitle?.[index] ?? 'Mobile experience'}</figcaption>
                         </figure>
                     ))}
+                    </div>}
                 </section>
 
                 <footer className="case-footer page-width">

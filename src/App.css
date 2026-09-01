@@ -285,17 +285,6 @@ textarea:focus-visible {
     opacity: 0;
   }
 }
-.hero-note {
-  position: absolute;
-  z-index: 2;
-  right: 2rem;
-  bottom: 2rem;
-  width: 220px;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.62);
-  font: 400 0.68rem/1.5 var(--mono);
-  text-align: right;
-}
 .section-heading {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.55fr);
@@ -515,7 +504,6 @@ textarea:focus-visible {
   aspect-ratio: 4/5;
   object-fit: cover;
   object-position: top;
-  filter: saturate(0.75);
 }
 .about-portrait span {
   position: absolute;
@@ -556,6 +544,9 @@ textarea:focus-visible {
 .skill-group {
   border-top: 1px solid #cbc7bd;
   padding-top: 1rem;
+}
+.skill-group:last-child:nth-child(odd) {
+  grid-column: 1/-1;
 }
 .skill-group h4 {
   margin-bottom: 0.5rem;
@@ -603,7 +594,7 @@ textarea:focus-visible {
 }
 .site-footer {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   gap: 2rem;
   padding: 1.5rem max(1rem, calc((100vw - 1180px) / 2));
   background: var(--ink);
@@ -747,9 +738,6 @@ textarea:focus-visible {
       rgba(10, 10, 14, 0.55)
     );
   }
-  .hero-note {
-    display: none;
-  }
   .hero-content {
     padding-top: 7rem;
   }
@@ -870,15 +858,19 @@ textarea:focus-visible {
   letter-spacing: -0.055em;
 }
 .case-summary {
-  display: grid;
-  grid-template-columns: 1fr minmax(300px, 0.65fr);
-  gap: clamp(3rem, 8vw, 8rem);
-  align-items: start;
+  display: block;
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
+.case-summary.has-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.4fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
 .case-summary > p {
+  max-width: 1000px;
   margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: clamp(1rem, 1.8vw, 1.2rem);
@@ -897,11 +889,31 @@ textarea:focus-visible {
   color: var(--ink);
 }
 .case-media {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-top: clamp(3rem, 7vw, 7rem);
+  padding-bottom: clamp(4rem, 9vw, 9rem);
+}
+.case-image-grid,
+.case-video-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
-  padding-top: clamp(3rem, 7vw, 7rem);
-  padding-bottom: clamp(4rem, 9vw, 9rem);
+}
+.case-image-grid > :last-child:nth-child(odd) {
+  grid-column: 1/-1;
+  width: calc(50% - 0.625rem);
+  justify-self: center;
+}
+.case-mobile-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+  justify-content: center;
+  align-items: start;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  border-top: 1px solid var(--line);
 }
 .case-media-item {
   position: relative;
@@ -911,24 +923,23 @@ textarea:focus-visible {
   border: 1px solid var(--line);
   background: var(--surface);
 }
-.case-media-item:nth-child(3n + 1) {
-  grid-column: 1/-1;
-}
 .case-media-item img {
   width: 100%;
   height: 100%;
-  min-height: 300px;
   object-fit: cover;
+  background: #ece9e2;
   transition: transform 0.5s ease;
 }
 .case-image {
   width: 100%;
+  max-height: 520px;
+  aspect-ratio: 16/10;
   padding: 0;
   text-align: left;
   cursor: zoom-in;
 }
 .case-image:hover img {
-  transform: scale(1.025);
+  transform: scale(1.05);
 }
 .case-image-label,
 .case-video figcaption {
@@ -955,13 +966,17 @@ textarea:focus-visible {
   font-size: 1rem;
 }
 .case-video {
+  width: 100%;
+  max-height: 520px;
+  aspect-ratio: 16/10;
   padding-bottom: 42px;
   background: #0e0e11;
 }
 .case-video video {
   display: block;
   width: 100%;
-  max-height: 75vh;
+  height: 100%;
+  object-fit: contain;
   background: #0e0e11;
 }
 .case-video figcaption span {
@@ -970,13 +985,16 @@ textarea:focus-visible {
 .case-mobile-video {
   display: grid;
   place-items: center;
+  width: min(100%, 360px);
+  max-height: 640px;
+  aspect-ratio: 9/16;
+  justify-self: center;
 }
 .case-mobile-video video {
-  width: auto;
-  height: min(75vh, 760px);
+  width: 100%;
+  height: 100%;
 }
 .case-placeholder {
-  grid-column: 1/-1;
   min-height: min(65vh, 680px);
 }
 .case-footer {
@@ -1006,8 +1024,17 @@ textarea:focus-visible {
     gap: 2rem;
   }
   .case-media {
+    gap: 0.75rem;
+  }
+  .case-image-grid,
+  .case-video-grid,
+  .case-mobile-video-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+  }
+  .case-image-grid > :last-child:nth-child(odd) {
+    grid-column: 1;
+    width: 100%;
   }
   .case-media-item,
   .case-media-item:nth-child(3n + 1) {

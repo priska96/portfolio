@@ -1,3 +1,4 @@
+// @ts-ignore CSS is bundled as a side-effect import by the build tool.
 import "./App.css";
 import { useState } from "react";
 import Home from "./Home";
@@ -64,7 +65,6 @@ function App() {
       </main>
       <footer className="site-footer">
         <p>© {new Date().getFullYear()} Priska Kohnen</p>
-        <p>Designed &amp; built with React and TypeScript.</p>
         <a href="#home">Back to top ↑</a>
       </footer>
     </div>

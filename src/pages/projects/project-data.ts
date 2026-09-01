@@ -84,15 +84,18 @@ export interface ProjectDetailData {
 export const projects: ProjectCardData[] = [
   {
     key: "sciendis",
-    title: "Healthcare applications at sciendis",
+    title: "Healthcare product ecosystem at sciendis",
     context: "Healthcare · 2024–2026",
     summary:
-      "My biggest professional milestone so far: cross-platform healthcare products, shared architecture and secure NFC communication with German electronic health cards.",
+      "My biggest professional milestone so far: a shared platform architecture for WUNDERA®, Wundumsorglos® and customer-specific white-label healthcare applications.",
     role: "Senior Frontend Developer & Frontend Team Lead",
     technologies: [
       "React",
       "React Native",
+      "Redux",
       "Expo",
+      "Next.js",
+      "Vite",
       "Swift",
       "C++",
       "Kotlin",
@@ -120,7 +123,7 @@ export const projects: ProjectCardData[] = [
     summary:
       "A web and mobile system for monitoring autonomous airport luggage vehicles and coordinating their daily work orders.",
     role: "Frontend Lead Developer",
-    technologies: ["React", "React Native", "Java", "Leaflet", "ROS"],
+    technologies: ["React", "React Native", "Java", "Leaflet", "Redis", "ROS"],
     image: fmsThumbnail,
     featured: true,
   },
@@ -129,9 +132,15 @@ export const projects: ProjectCardData[] = [
     title: "Lotti.ai",
     context: "AI-enabled education · Teclead Ventures",
     summary:
-      "An approachable AI-powered web and mobile companion helping people over 50 navigate digital life.",
+      "An approachable AI-powered web and mobile product delivered in a consulting environment, helping people over 50 navigate digital life.",
     role: "React Native Lead Developer",
-    technologies: ["React Native", "Next.js", "OpenAI", "TypeScript"],
+    technologies: [
+      "React Native",
+      "Next.js",
+      "Node.js",
+      "OpenAI",
+      "TypeScript",
+    ],
     image: lottiThumbnail,
     featured: true,
   },
@@ -140,9 +149,9 @@ export const projects: ProjectCardData[] = [
     title: "The Chagos",
     context: "Real-estate SaaS · Teclead Ventures",
     summary:
-      "A SaaS platform helping interior construction projects make more sustainable product decisions.",
+      "A typed full-stack SaaS platform developed from requirements to implementation, helping construction projects make more sustainable product decisions.",
     role: "Full-Stack Developer",
-    technologies: ["React", "Next.js", "tRPC", "Prisma"],
+    technologies: ["React", "Next.js", "Node.js", "tRPC", "Prisma"],
     image: chagosThumbnail,
     featured: false,
   },
@@ -151,9 +160,9 @@ export const projects: ProjectCardData[] = [
     title: "TwoTickets.de",
     context: "Culture platform · TwoTickets.de",
     summary:
-      "Platform modernization, new search experiences and a complete technology-stack upgrade.",
+      "A Germany-wide event calendar and city-explorer club, combining Django platform development with UI modernization, QA and team support.",
     role: "Full-Stack Web Developer",
-    technologies: ["Python", "Django", "JavaScript", "SCSS"],
+    technologies: ["Python", "Django", "PostgreSQL", "JavaScript", "SCSS"],
     image: twoticketsThumbnail,
     featured: false,
   },
@@ -166,13 +175,14 @@ export const experience: ExperienceData[] = [
     location: "Leipzig · Remote",
     title: "Senior Frontend Developer · Frontend Team Lead",
     description:
-      "My biggest professional milestone so far: leading frontend delivery while expanding from React Native into architecture, native iOS and Android development, secure communication and applied cryptography.",
+      "My biggest professional milestone so far: leading frontend delivery across sciendis’ own healthcare products and customer-specific white-label solutions while remaining hands-on in architecture, web, mobile and native development.",
     highlights: [
       "Led technical planning, task prioritization, delegation, code reviews and mentoring across time zones",
-      "Established a TypeScript monorepo with shared React and React Native components, a Kysely-based SQLite data layer and reusable Strapi REST integration",
-      "Built secure eGK NFC functionality with Swift, Kotlin, PACE authentication, cryptographic key exchange and OpenHealthCardKit",
+      "Established a TypeScript monorepo and central component library so WUNDERA®, Wundumsorglos® and white-label customer applications could share web, mobile, data and API foundations without duplicating code",
+      "Built secure eGK NFC functionality with Swift, Kotlin, PACE authentication, cryptographic key exchange and gematik’s OpenHealthCardKit",
       "Modernized the mobile architecture from Expo SDK 51 to 53 and migrated local persistence to expo-sqlite",
-      "Developed an Expo online-pharmacy app with WebView and native CardLink integration for electronic prescriptions",
+      "Developed an Expo online-pharmacy app with WebView and native CardLink SDK integration for electronic prescriptions",
+      "Supported releases, resolved production-critical issues and communicated directly with healthcare clients on complex technical questions",
     ],
   },
   {
@@ -181,11 +191,15 @@ export const experience: ExperienceData[] = [
     location: "Berlin",
     title: "Full-Stack Developer & Consultant",
     description:
-      "Built products across real-estate SaaS and AI-enabled education using React, Next.js and React Native.",
+      "Combined hands-on software development with management consulting in a company delivering architecture, technology coaching and digital products for enterprise clients. My work covered requirements, implementation and software architecture across real-estate SaaS and AI-enabled education.",
     highlights: [
+      "Advised on software-development requirements and translated changing product needs into practical implementation plans",
+      "Contributed to the conception and implementation of web, mobile and full-stack software architecture",
+      "Worked with Node.js and Next.js across typed full-stack applications",
       "Developed dynamic UI components, tRPC APIs and Prisma database schemas for a real-estate SaaS platform",
       "Integrated OpenAI APIs to generate learning materials for an AI-powered education product",
       "Independently built the complementary React Native mobile application from the ground up",
+      "Supported team-building activities and collaborated professionally with managers, developers and customers",
     ],
   },
   {
@@ -208,11 +222,14 @@ export const experience: ExperienceData[] = [
     location: "Berlin",
     title: "Full-Stack Web Developer",
     description:
-      "Developed and modernized a Python and Django culture platform while supporting the onboarding of new developers.",
+      "Developed and maintained the frontend and backend of a Germany-wide event calendar and city-explorer club. The role also included UI implementation, quality assurance, recruiting support and ten months of independent remote work from abroad.",
     highlights: [
-      "Redesigned landing and event pages and improved search and filtering",
+      "Developed and maintained frontend and backend solutions with Python and Django",
+      "Co-designed and implemented interfaces with HTML, SCSS and JavaScript, including landing pages, event pages, search and filtering",
+      "Participated in quality assurance and helped maintain reliable releases",
       "Completed a full technology-stack upgrade",
-      "Supported onboarding and training of new developers",
+      "Supported staff interviews and trained new employees",
+      "Worked remotely and independently from abroad for ten months in 2020",
     ],
   },
 ];
@@ -221,25 +238,25 @@ export const data: Record<string, ProjectDetailData> = {
   sciendis: {
     imgs: [sciendisWebAppDashboard, sciendisWebAppPatient, sciendisWebAppUsers],
     imgTitle: [
-      "Wundumsorglos dashboard and analytics",
+      "Wundera web app - dashboard and analytics",
       "Digital patient record",
       "User and license management",
     ],
-    mobileVids: [sciendisPharmacyCardLink, sciendisNfc],
+    mobileVids: [sciendisNfc, sciendisPharmacyCardLink],
     vidTitle: [
+      "Reading a German electronic health card via NFC and creating patient, wound and wound report entries",
       "Retrieving an electronic prescription via CardLink",
-      "Reading a German electronic health card via NFC",
     ],
-    cardTitle: "Healthcare applications at sciendis",
+    cardTitle: "Healthcare product ecosystem at sciendis",
     cardText:
-      "Sciendis became my biggest professional milestone so far. As Senior Frontend Developer and Frontend Team Lead, I combined hands-on product development with architecture, technical planning, code reviews and mentoring. I developed and evolved React and React Native healthcare applications, including the Wundumsorglos web platform for patient, wound-care, staffing and order workflows. I established an internal TypeScript monorepo with shared components, a Kysely-based SQLite data layer and reusable REST integration for the Strapi CMS. I also expanded into native Swift and Kotlin development while building secure cross-platform NFC functionality for German electronic health cards, including PACE authentication, cryptographic key exchange and OpenHealthCardKit. Further work included upgrading Expo SDK 51 to 53, migrating persistence to expo-sqlite and developing an online-pharmacy application with native CardLink integration for electronic prescriptions.",
+      "Sciendis develops and operates digital healthcare products such as WUNDERA® and Wundumsorglos®, as well as customer-specific solutions for established companies in healthcare and nursing. The product landscape includes cloud-based web and mobile applications built with technologies including React, Next.js and Vite that digitize patient, wound-care, staffing, order and supply workflows. WUNDERA® was available as a React web platform with a compatible React Native mobile application, and its foundations were also used to deliver individually branded white-label solutions for enterprise customers.<br/><br/>As Senior Frontend Developer and Frontend Team Lead, I was responsible for frontend architecture, technical standards and central modules across this product ecosystem. I designed an internal TypeScript monorepo and a shared component library so the company's own products and customer applications could reuse the same React and React Native components instead of duplicating implementations. The shared foundation also included a Kysely-based SQLite data layer with standardized repository and read/write operations, plus a generic REST integration for the Strapi CMS. This made product variants easier to maintain while preserving consistent behavior and allowing customer-specific customization.<br/><br/>Across the React and React Native applications, I worked with Redux for predictable shared state management and Redux Persist where application state needed to survive restarts. For the WUNDERA® mobile application, I upgraded Expo SDK 51 to 53, resolved the resulting migration issues and moved the structured local data layer to expo-sqlite for more reliable offline access. Redux Persist and expo-sqlite served different persistence needs: durable application state on one side and structured domain data on the other.<br/><br/>I also expanded into native Swift and Kotlin development while implementing secure cross-platform NFC communication with German electronic health cards. This included PACE authentication, cryptographic key exchange and gematik's OpenHealthCardKit. In an online-pharmacy project, I took substantial technical responsibility from conception through production integration and implemented native CardLink functionality for retrieving electronic prescriptions. Alongside product development and team leadership, I supported releases, investigated production-critical issues and communicated directly with customers on complex technical questions.",
   },
   nutritionplanner: {
     vids: [nutritionplanner],
     cardTitle: "Meal Plan Generator",
     cardText:
       "The goal of this project was to create an algorithm to generate personalised meal plans, " +
-      "based on the users' input and to output them in a calendar overview as well as export them in a pdf " +
+      "based on the users’ input and to output them in a calendar overview as well as export them in a pdf " +
       "file. These meal plans support typical diets and eating habits  and provide a suitable nutrition " +
       "intake. To create the meal plans and to choose the right  foods in a healthy measurement, an " +
       "optimization problem was set up and solved by linear programming. The focus was more set on the " +
@@ -248,6 +265,7 @@ export const data: Record<string, ProjectDetailData> = {
   },
   jabe: {
     imgs: [jabe],
+    imgTitle: ["JABE restaurant website"],
     cardTitle: "JABE",
     cardText:
       "The JABE is a Japanese restaurant I created the website for and maintained for some time. " +
@@ -257,6 +275,7 @@ export const data: Record<string, ProjectDetailData> = {
   },
   poilei: {
     imgs: [poilei_cookies],
+    imgTitle: ["Poilei cookie-consent implementation"],
     cardTitle: "Poilei",
     cardText:
       "Poilei is an Italian shoe shop using Shopify. Since I maintain the page I mostly fix " +
@@ -267,6 +286,7 @@ export const data: Record<string, ProjectDetailData> = {
   },
   glowingkids: {
     imgs: [glowingkids],
+    imgTitle: ["GlowingKids online storefront"],
     cardTitle: "GlowingKids",
     cardText:
       "GlowingKids is a Shopify online shop selling children clothing. I maintain the front-end and " +
@@ -277,6 +297,12 @@ export const data: Record<string, ProjectDetailData> = {
   },
   pscore: {
     imgs: [pscore_abuse, pscore_digital, pscore_workshop, pscore_seminar],
+    imgTitle: [
+      "Child Abuse information page",
+      "Digital Life and Digital Rights page",
+      "Online Workshop page",
+      "Online Seminar page",
+    ],
     cardTitle: "PSCORE",
     cardText:
       "PSCORE stands for People for Successful Corean REunification and is an NGO that fights for " +
@@ -288,6 +314,11 @@ export const data: Record<string, ProjectDetailData> = {
   },
   pscoreedu: {
     imgs: [pscoreedu_1, pscoreedu_2, pscoreedu_register],
+    imgTitle: [
+      "Successful tutoring experiences",
+      "PSCORE EDU tutoring content",
+      "Student and tutor registration",
+    ],
     cardTitle: "PSCORE EDU",
     cardText:
       "The education page from PSCORE is a WordPress website to provide tutoring classes for " +
@@ -299,29 +330,36 @@ export const data: Record<string, ProjectDetailData> = {
   },
   munscr: {
     imgs: [munscr],
+    imgTitle: ["MUNSCR conference website"],
     cardTitle: "MUNSCR",
     cardText:
       "MUNSCR stands for Model United Nations for Successful Corean Reunification. It is an on going " +
       "project between PSCORE and me. The MUNSCR conference is held once a year and therefore is updated each year." +
       " It is a WordPress website that I designed and developed from scratch and continuously maintain.",
-    buttonWebsite: "http://munscr.com",
+    buttonWebsite: "",
     buttonCode: "",
   },
   modelunsf: {
     imgs: [modelunsf],
+    imgTitle: ["ModelUNSF conference website"],
     cardTitle: "ModelUNSF",
     cardText:
       "Model United Nations Strategic Framework Conference (Model UNSF) is a 3-day multinational youth-led " +
       "conference that PSCORE organized in 2021 and 2023. It is a WordPress website that I designed and developed " +
       "from scratch and maintain.",
-    buttonWebsite: "http://munscr.com",
+    buttonWebsite: "",
     buttonCode: "",
   },
   twotickets: {
     imgs: [twotickets_redesign, twotickets_filter, twotickets_vattenfall_4],
+    imgTitle: [
+      "Landing and event page redesign",
+      "Search and filter redesign",
+      "Vattenfall affiliate experience redesign",
+    ],
     cardTitle: "TwoTickets.de",
     cardText:
-      "TwoTickets.de is a culture platform where members can win tickets for events from partner organizers. As a Full-Stack Web Developer, I developed and modernized the Python and Django application across both backend and frontend. My work included redesigning landing and event pages, improving search and filtering, adapting the affiliate experience for Vattenfall and completing a full technology-stack upgrade. I also supported the onboarding and training of new developers.",
+      "TwoTickets.de is a Germany-wide event calendar and city-explorer club that helps members discover new cultural, entertainment and sporting events and experience them in pairs. As a Full-Stack Web Developer, I developed and maintained frontend and backend solutions based on Python, Django and PostgreSQL. I co-designed and implemented the user interface with HTML, SCSS and JavaScript, including redesigned landing and event pages, improved search and filtering and an adapted affiliate experience for Vattenfall. I also participated in quality assurance and completed a full technology-stack upgrade.<br/><br/>Beyond product development, I supported staff interviews and trained new employees. During a ten-month stay abroad in 2020, I continued working for the company remotely and independently, taking responsibility for delivering my work across locations and time zones.",
     buttonAffiliate: "https://vattenfall.de/freikarten",
   },
   webVisualizer: {
@@ -343,19 +381,33 @@ export const data: Record<string, ProjectDetailData> = {
       fmsMobileFS,
       fmsMobileGSE,
     ],
+    imgTitle: [
+      "Administration of airport map zones",
+      "Configurable notification rules",
+      "Mobile work-order overview",
+      "Mobile work-order details",
+      "Starting a vehicle work order",
+      "Mobile fleet-status overview",
+      "Ground-support equipment overview",
+    ],
     vids: [fmsDashboard],
     poster: [],
     vidTitle: ["Dashboard - Monitoring view"],
     cardTitle: "Fleet Management System",
     cardText:
-      "ThorDrive's Fleet Management System supported the daily operation of autonomous airport luggage vehicles. I led frontend development of the React application, which monitored vehicle health, location and work orders and provided administration tools for vehicles, workspaces, map zones and notifications. I implemented map interactions with Leaflet and integrated the frontend with a Java Spring Boot backend. I also developed the complementary React Native application used by airport ground workers to issue, start and complete vehicle work orders. Together, the web and mobile products turned autonomous-system data into practical operational workflows.",
+      "ThorDrive’s Fleet Management System supported the daily operation of autonomous airport luggage vehicles. I led frontend development of the React application, which monitored vehicle health, location and work orders and provided administration tools for vehicles, workspaces, map zones and notifications. I implemented map interactions with Leaflet, worked with Redis for fast operational data access and integrated the frontend with a Java Spring Boot backend. I also developed the complementary React Native application used by airport ground workers to issue, start and complete vehicle work orders. Together, the web and mobile products turned autonomous-system data into practical operational workflows.",
     buttonCode: "",
   },
   theChagos: {
     imgs: [chagos2, chagos3, chagos1],
+    imgTitle: [
+      "Construction project configuration",
+      "Sustainability analysis and action plan",
+      "Product and material selection",
+    ],
     cardTitle: "The Chagos",
     cardText:
-      "The Chagos is a real-estate SaaS platform that helps interior construction projects evaluate product decisions against ESG goals. I developed dynamic React and Next.js interfaces, tRPC APIs and Prisma database schemas for project configuration, product selection and sustainability analysis. I also built administrative workflows for managing products and producers, with form validation through Zod. The work combined product-facing UI development with typed full-stack implementation.",
+      "The Chagos is a real-estate SaaS platform that helps interior construction projects evaluate product decisions against ESG goals. Within Teclead Ventures’ consulting and software-delivery environment, I supported the product from requirements and architecture through implementation. I developed dynamic React and Next.js interfaces, tRPC APIs and Prisma database schemas for project configuration, product selection and sustainability analysis. I also built administrative workflows for managing products and producers, with form validation through Zod. The work combined customer and product requirements with a typed full-stack architecture and practical implementation.",
     buttonCode: "",
   },
   lotti: {
@@ -365,12 +417,18 @@ export const data: Record<string, ProjectDetailData> = {
       mobileLottiAllChats,
       lottiExplore,
     ],
+    imgTitle: [
+      "Mobile conversation with Lotti",
+      "AI-generated follow-up questions",
+      "Mobile conversation history",
+      "Guided topic exploration",
+    ],
     mobileVids: [mobileLottiSTT],
     poster: [],
     vidTitle: ["Speech To Text Feature"],
     cardTitle: "Lotti.ai - Die KI für Ü50",
     cardText:
-      "Lotti is an AI-powered education product designed to help people over 50 navigate digital topics with confidence. The experience combines approachable conversations, suggested questions, follow-up prompts, speech-to-text and guided topic exploration. I independently developed the complementary React Native application from the ground up, including push notifications and mobile interaction patterns, while also contributing to the React and Next.js web product. The application integrated OpenAI APIs to generate helpful, motivating learning experiences.",
+      "Lotti is an AI-powered education product designed to help people over 50 navigate digital topics with confidence. The experience combines approachable conversations, suggested questions, follow-up prompts, speech-to-text and guided topic exploration. Working across consulting, requirements and implementation, I independently conceived and developed the complementary React Native application from the ground up, including its architecture, push notifications and mobile interaction patterns. I also contributed to the React and Next.js web product and integrated OpenAI APIs to generate helpful, motivating learning experiences.",
     buttonCode: "",
   },
 };

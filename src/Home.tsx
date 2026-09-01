@@ -41,7 +41,6 @@ function Home() {
                     <div className="terminal-body"><span className="prompt">priska@portfolio:~$</span> {command}<span className="cursor"/></div>
                 </div>
             </div>
-            <p className="hero-note">The stairs still represent the journey — the terminal, where much of it began.</p>
         </section>
     );
 }
