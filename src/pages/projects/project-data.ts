@@ -52,6 +52,8 @@ import sciendisMobileApp from "../../images/sciendis-mobile-app.mov";
 import sciendisMobileDashboard from "../../images/sciendis-mobile-app1.png";
 import sciendisMobilePatient from "../../images/sciendis-mobile-app2.png";
 import sciendisMobileWound from "../../images/sciendis-mobile-app3.png";
+import sciendisCardLinkConnect from "../../images/sciendis-cardlink1.png";
+import sciendisCardLinkCart from "../../images/sciendis-cardlink2.png";
 
 export interface ProjectCardData {
   key: string;
@@ -61,6 +63,7 @@ export interface ProjectCardData {
   role: string;
   technologies: string[];
   image?: string;
+  imageDisplay?: "cover" | "contain";
   visualWords?: string[];
   featured: boolean;
 }
@@ -106,15 +109,23 @@ export const projects: ProjectCardData[] = [
     title: "WUNDERA Healthcare Platform",
     context: "Web · Mobile · White label · sciendis",
     summary:
-      "Compatible WUNDERA® web and mobile products forming the foundation for white-label healthcare solutions, including native eGK workflows.",
+      "Compatible WUNDERA® web and mobile products supported by privately versioned packages shared across white-label healthcare applications.",
     role: "Senior Frontend Developer · Frontend Team Lead",
-    technologies: ["TypeScript", "React", "React Native", "Expo", "SQLite", "Vite"],
+    technologies: [
+      "TypeScript",
+      "React",
+      "React Native",
+      "Expo",
+      "SQLite",
+      "Vite",
+      "Next.js",
+    ],
     image: sciendisWebAppDashboard,
     featured: true,
   },
   {
     key: "sciendisEgk",
-    title: "Expo FHC NFC Module",
+    title: "Expo NFC Module",
     context: "WUNDERA native integration · sciendis",
     summary:
       "A native module integrated into WUNDERA Mobile for securely reading German electronic health cards through Swift and Kotlin.",
@@ -127,8 +138,10 @@ export const projects: ProjectCardData[] = [
       "NFC",
       "PACE",
       "Cryptography",
+      "OpenHealthCardKit",
     ],
-    visualWords: ["Read", "Secure", "Connect"],
+    image: sciendisNfcScan,
+    imageDisplay: "contain",
     featured: true,
   },
   {
@@ -136,10 +149,18 @@ export const projects: ProjectCardData[] = [
     title: "Online Pharmacy & CardLink",
     context: "Independent pharmacy app · sciendis",
     summary:
-      "An independent Expo pharmacy app with a local native CardLink module built directly as part of the application codebase.",
+      "An independent Expo pharmacy app with a local native CardLink module built and released with the application.",
     role: "Technical Project Owner · Mobile Developer",
-    technologies: ["Expo Modules", "React Native", "WebView", "Swift", "Android", "FHIR"],
-    visualWords: ["Web", "Native", "eRx"],
+    technologies: [
+      "Expo Modules",
+      "React Native",
+      "WebView",
+      "Swift",
+      "Android",
+      "FHIR",
+    ],
+    image: sciendisCardLinkCart,
+    imageDisplay: "contain",
     featured: true,
   },
   {
@@ -215,7 +236,7 @@ export const experience: ExperienceData[] = [
       "My biggest professional milestone so far: leading frontend delivery across sciendis’ own healthcare products and customer-specific white-label solutions while remaining hands-on in architecture, web, mobile and native development.",
     highlights: [
       "Led frontend architecture, planning, reviews and mentoring across healthcare web and mobile products",
-      "Built a shared TypeScript platform for WUNDERA®, Wundumsorglos® and white-label customer solutions",
+      "Built and privately published versioned TypeScript packages consumed by WUNDERA®, Wundumsorglos® and white-label applications",
       "Owned native Gematik integrations spanning eGK NFC, PACE and CardLink from concept to production",
     ],
   },
@@ -283,10 +304,15 @@ export const data: Record<string, ProjectDetailData> = {
     vidTitle: ["WUNDERA mobile healthcare workflows"],
     cardTitle: "WUNDERA Healthcare Platform",
     cardText:
-      "Sciendis develops WUNDERA® as compatible web and mobile applications for patient, wound-care, staffing, order and supply workflows. WUNDERA also provided the product foundation for individually branded white-label solutions, while Wundumsorglos® and other customer applications reused parts of the same shared platform.",
+      "Sciendis develops WUNDERA® as compatible web and mobile applications for patient, wound-care, staffing, order and supply workflows. Individually maintained WUNDERA and white-label applications consumed versioned packages from a shared internal platform, while retaining their own branding, workflows and release cycles.",
     period: "2024–2026",
     role: "Frontend Team Lead · Architecture Owner",
-    focus: ["Web and mobile", "White-label platform", "Frontend architecture", "Synchronization"],
+    focus: [
+      "Web and mobile",
+      "White-label platform",
+      "Frontend architecture",
+      "Synchronization",
+    ],
     stack: [
       "TypeScript",
       "React",
@@ -301,19 +327,24 @@ export const data: Record<string, ProjectDetailData> = {
     sections: [
       {
         eyebrow: "Challenge",
-        title: "One product foundation, multiple branded solutions",
-        body: "WUNDERA’s web and mobile applications formed the basis for individually branded white-label products. The variants shared healthcare workflows, interface components, data-access patterns and CMS integrations, but still needed room for customer-specific behavior and presentation.",
+        title: "Shared capabilities across independent products",
+        body: "WUNDERA’s web and mobile applications, individually branded white-label products and other healthcare solutions needed many of the same interface components, data-access patterns and CMS integrations. Maintaining separate implementations across their product codebases would have created duplication and inconsistent behavior.",
       },
       {
         eyebrow: "Approach",
-        title: "A shared TypeScript platform",
-        body: "I established an internal monorepo with shared React and React Native component libraries, Kysely-based SQLite repositories and a reusable REST integration for Strapi. Product teams could build on consistent foundations while retaining customer-specific customization.",
+        title: "Versioned packages from a dedicated monorepo",
+        body: "I established a dedicated TypeScript monorepo containing reusable React and React Native component libraries, Kysely-based SQLite repositories and a generic REST integration for Strapi. The packages were versioned and published privately within the company’s npm organization, then installed as dependencies in independently maintained web, mobile and white-label applications.",
         points: [
-          "Defined central frontend architecture and technical standards",
-          "Standardized repository and read/write operations",
-          "Led planning, reviews and mentoring across the frontend team",
-          "Supported releases, production issues and technical client communication",
+          "Shared improvements could be released and adopted centrally through explicit package versions",
+          "Each consuming application retained its product-specific branding, workflows and release cycle",
+          "Standardized repository, read/write and API integration patterns across products",
+          "Defined technical standards and supported package adoption across product teams",
         ],
+      },
+      {
+        eyebrow: "My responsibility",
+        title: "Architecture ownership and adoption",
+        body: "I owned the architecture of the shared frontend platform, designed central packages and technical standards, and supported their adoption across the company’s web, mobile and customer-specific applications. I combined this hands-on work with planning, reviews, mentoring, release support and technical client communication.",
       },
       {
         eyebrow: "Web and mobile",
@@ -328,7 +359,7 @@ export const data: Record<string, ProjectDetailData> = {
       {
         eyebrow: "Native extension",
         title: "Integrating electronic health-card workflows",
-        body: "The WUNDERA mobile application also integrated the Expo FHC NFC module I developed. It allowed patient information to be read securely from German electronic health cards and transferred into WUNDERA’s patient and wound-care workflows.",
+        body: "The WUNDERA mobile application also integrated the Expo NFC module I developed. It allowed patient information to be read securely from German electronic health cards and transferred into WUNDERA’s patient and wound-care workflows.",
       },
     ],
   },
@@ -343,7 +374,7 @@ export const data: Record<string, ProjectDetailData> = {
     vidTitle: [
       "Integrating the cross-platform Expo NFC module into the healthcare application",
     ],
-    cardTitle: "Expo FHC NFC Module",
+    cardTitle: "Expo NFC Module",
     cardText:
       "Integrated into the WUNDERA mobile application, the module replaces manual patient-data entry by reading German electronic health cards securely and making validated data available to patient and wound-care workflows.",
     period: "2024–2026",
@@ -371,7 +402,13 @@ export const data: Record<string, ProjectDetailData> = {
     ],
   },
   sciendisCardlink: {
+    mobileImgs: [sciendisCardLinkConnect, sciendisCardLinkCart],
+    mobileImgTitle: [
+      "CardLink contact details and connection workflow",
+      "Electronic prescription transferred into the pharmacy cart",
+    ],
     mobileVids: [sciendisPharmacyCardLink],
+    poster: [sciendisCardLinkConnect],
     vidTitle: ["Retrieving an electronic prescription through CardLink"],
     cardTitle: "Online Pharmacy & CardLink",
     cardText:
