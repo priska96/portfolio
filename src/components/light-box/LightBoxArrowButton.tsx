@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { useTransition } from '@react-spring/web';
 import {ButtonControl} from "./LightBoxButtonControl";
+import type {CSSProperties, MouseEventHandler} from 'react';
 
-const ArrowButton = ({ className, disabled, onClick, position , buttonStyle}) => {
+interface ArrowButtonProps {
+    className?: string;
+    disabled?: boolean;
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    position: 'left' | 'right';
+    buttonStyle?: CSSProperties;
+}
+
+const ArrowButton = ({ className, disabled = false, onClick, position, buttonStyle}: ArrowButtonProps) => {
     const transitions = useTransition(!disabled, {
         enter: { opacity: 1 },
         from: { opacity: 0 },
@@ -14,7 +23,7 @@ const ArrowButton = ({ className, disabled, onClick, position , buttonStyle}) =>
     return transitions(
         (props, item) =>
             item && (
-                <div className={className} style={{zIndex: 999, ...props}}>
+                <div className={className} style={{zIndex: 999, opacity: props.opacity.get()}}>
                     <ButtonControl 
                     style={{
                         position:"absolute", 

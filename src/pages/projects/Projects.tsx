@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import {Button, ButtonGroup, Card, CardGroup, Carousel} from 'react-bootstrap';
 import { Jumbotron } from '../../components/Jumbotron';
 import ProjectDetail from "./ProjectDetail";
@@ -19,9 +18,30 @@ import fms from '../../images/fms_small.png';
 import chagos from '../../images/chagos_smal.png'
 import lotti from '../../images/lotti_small.png'
 
+interface ProjectCard {
+    name: string;
+    img: string;
+    cardTitle: string;
+    cardText: string;
+    buttonWebsite?: string;
+    buttonCode?: string;
+}
 
-class Project extends React.Component {
-    constructor(props) {
+interface ProjectProps {
+    cardsGroup: string;
+    cards: ProjectCard[];
+}
+
+interface ProjectState {
+    show: boolean;
+    cardName: string;
+}
+
+class Project extends React.Component<ProjectProps, ProjectState> {
+    private readonly cardsGroup: string;
+    private readonly cards: ProjectCard[];
+
+    constructor(props: ProjectProps) {
         super(props);
         this.cardsGroup = props.cardsGroup;
         this.cards = props.cards;
@@ -39,7 +59,7 @@ class Project extends React.Component {
         console.log('close')
         this.setState({show: false});
     }
-    viewDetail(cardName){
+    viewDetail(cardName: string){
         this.setState({show: true, cardName: cardName})
         // let show = true;
         // return new ProjectDetail({show:show, card:cardName})
@@ -55,7 +75,7 @@ class Project extends React.Component {
                 </Card>)
             )
     }
-    cardInner(card){
+    cardInner(card: ProjectCard){
         return(
             <React.Fragment>
                 <Card.Img variant="top" src={card.img}/>
@@ -107,17 +127,6 @@ class Project extends React.Component {
         )
     }
 }
-
-Project.propTypes = {
-    cardsGroup: PropTypes.string,
-    cards: PropTypes.array
-};
-
-Project.defaultProps = {
-    cardsGroup: '',
-    cards: []
-};
-
 
 const data = {
     content: {

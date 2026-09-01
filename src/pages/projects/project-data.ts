@@ -37,8 +37,20 @@ import chagos1 from '../../images/chagos1.png';
 import chagos2 from '../../images/chagos2.png';
 import chagos3 from '../../images/chagos3.png';
 
+export interface ProjectDetailData {
+    imgs?: string[];
+    vids?: string[];
+    mobileVids?: string[];
+    poster?: string[];
+    vidTitle?: string[];
+    cardTitle: string;
+    cardText: string;
+    buttonWebsite?: string;
+    buttonCode?: string;
+    buttonAffiliate?: string;
+}
 
-export const data = {
+export const data: Record<string, ProjectDetailData> = {
     nutritionplanner: {
         vids: [nutritionplanner],
         cardTitle: "Meal Plan Generator",

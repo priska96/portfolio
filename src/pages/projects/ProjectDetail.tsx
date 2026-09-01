@@ -6,22 +6,28 @@ import LightBoxWrapper from "../../components/light-box/LightBoxWrapper";
 import '../../App.css';
 import {data} from "./project-data";
 
-export default function  ProjectDetail(props){
+interface ProjectDetailProps {
+    show: boolean;
+    card: string;
+    closeAction: () => void;
+}
+
+export default function ProjectDetail(props: ProjectDetailProps){
     const [show, setShow] = React.useState(props.show || false);
     const [card, setCard] = React.useState(props.card);
     const [showLightBox, setShowLightBox] = React.useState(false);
     const [srcIndex, setSrcIndex] = React.useState(0);
 
     React.useEffect(()=>{
-        if(props.show !== show) setShow(props.show);
-        if(props.card !== card) setCard(props.card);
-    },[props])
+        setShow(props.show);
+        setCard(props.card);
+    },[props.show, props.card])
 
     const handleClose = () => {
         setShowLightBox(false);
     }
 
-    const viewLightbox = (srcIndex) => {
+    const viewLightbox = (srcIndex: number) => {
         console.log(srcIndex, 'true')
         setShowLightBox(true);
         setSrcIndex(srcIndex)
@@ -30,6 +36,8 @@ export default function  ProjectDetail(props){
     if (!(card in data)) {
         return null
     }
+
+    const detail = data[card];
 
     return (
         <React.Fragment>
@@ -47,16 +55,16 @@ export default function  ProjectDetail(props){
                     </Button>
                 </div>
                 <Jumbotron className="img-container2 bg-transparent">
-                    <h1>{data[card].cardTitle}</h1>
+                    <h1>{detail.cardTitle}</h1>
                     <Container
                         className="d-flex flex-lg-row flex-column flex-wrap justify-content-lg-start align-items-lg-center justify-content-center align-items-start aboutme">
                         <div className="project-media">
-                            {'vids' in data[card] ?
+                            {detail.vids ?
                                 <div className="video-box" >
-                                    {data[card].vids.map((src, idx) =>
+                                    {detail.vids.map((src, idx) =>
                                         <div key={idx} className="project-video">
-                                            <div className="overlay-text"><span>{data[card].vidTitle[idx]}</span></div>
-                                            <video poster={data[card].poster[idx]} controls>
+                                            <div className="overlay-text"><span>{detail.vidTitle?.[idx]}</span></div>
+                                            <video poster={detail.poster?.[idx]} controls>
                                                 <source src={src} type="video/mp4"/>Your browser does not support the video tag.
                                             </video>
                                         </div>
@@ -64,9 +72,9 @@ export default function  ProjectDetail(props){
                                 </div>
                             : ''
                             }
-                            {'imgs' in data[card] ?
+                            {detail.imgs ?
                                 <div className="image-box">
-                                    {data[card].imgs.map((src, idx) =>
+                                    {detail.imgs.map((src, idx) =>
                                         <div key={idx} className="project-img" onClick={() => viewLightbox(idx)}>
                                             <div className="overlay-text"><span>Click to enlarge</span></div>
                                             <Image src={src} key={idx}/>
@@ -75,12 +83,12 @@ export default function  ProjectDetail(props){
                                 </div>
                                 : ''
                             }
-                             {'mobileVids' in data[card] ?
+                             {detail.mobileVids ?
                                 <div className="video-box mobile" >
-                                    {data[card].mobileVids.map((src, idx) =>
+                                    {detail.mobileVids.map((src, idx) =>
                                         <div key={idx} className="project-video">
-                                            <div className="overlay-text"><span>{data[card].vidTitle[idx]}</span></div>
-                                            <video poster={data[card].poster[idx]} controls>
+                                            <div className="overlay-text"><span>{detail.vidTitle?.[idx]}</span></div>
+                                            <video poster={detail.poster?.[idx]} controls>
                                                 <source src={src} type="video/mp4"/>Your browser does not support the video tag.
                                             </video>
                                         </div>
@@ -90,13 +98,13 @@ export default function  ProjectDetail(props){
                             }
                         </div>
                         <div className="project-desc">
-                            <p>{parse(data[card].cardText)}</p>
+                            <p>{parse(detail.cardText)}</p>
                         </div>
-                        {data[card].buttonCode ?
+                        {detail.buttonCode ?
                             <ButtonGroup className="justify-content-between">
                                 <Button
                                     variant="loading"
-                                    href={data[card].buttonCode}
+                                    href={detail.buttonCode}
                                     target="_blank"
                                 >
                                     View Code
@@ -105,11 +113,11 @@ export default function  ProjectDetail(props){
                             :
                             null
                         }
-                        {data[card].buttonAffiliate ?
+                        {detail.buttonAffiliate ?
                             <ButtonGroup className="justify-content-between">
                                 <Button
                                     variant="loading"
-                                    href={data[card].buttonAffiliate}
+                                    href={detail.buttonAffiliate}
                                     target="_blank"
                                 >
                                     View Affiliate Website
@@ -123,7 +131,7 @@ export default function  ProjectDetail(props){
                { showLightBox ? <LightBoxWrapper
                     isOpen={showLightBox}
                     srcIndex={srcIndex}
-                    card={data[card]}
+                    card={detail}
                     handleClose={handleClose}
                 />  : null }
             </Modal>

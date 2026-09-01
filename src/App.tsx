@@ -2,10 +2,10 @@ import logo from './images/logo.png';
 import './App.css';
 import React from 'react'
 import {Nav, Navbar} from 'react-bootstrap';
-import Home from './Home.js'
-import Projects from './pages/projects/Projects.js'
-import AboutMe from './pages/about-me/AboutMe.js'
-import Contact from './pages/contact/Contact.js'
+import Home from './Home'
+import Projects from './pages/projects/Projects'
+import AboutMe from './pages/about-me/AboutMe'
+import Contact from './pages/contact/Contact'
 
 
 function App() {
@@ -47,14 +47,14 @@ function App() {
                         </Navbar>
                     </div>
                 </div>
-                <a className="anchor" name="home" href='#home'>{" "}</a>
+                <a className="anchor" id="home" href='#home'>{" "}</a>
                 <Home/>
-                <a className="anchor" name="about" href="#about"  >{" "}</a>
+                <a className="anchor" id="about" href="#about"  >{" "}</a>
                 <AboutMe/>
-                <a className="anchor" name="projects" href="#projects">{" "}</a>
+                <a className="anchor" id="projects" href="#projects">{" "}</a>
                  <Projects/> 
                 <div id="project-details"/>
-                <a className="anchor" name="contact" href="#contact">{" "}</a>
+                <a className="anchor" id="contact" href="#contact">{" "}</a>
                  <Contact/> 
                 <footer>
                     <div id="go-top">
