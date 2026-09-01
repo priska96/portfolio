@@ -305,6 +305,15 @@ textarea:focus-visible {
   min-height: 0;
   max-height: 500px;
 }
+.featured-projects .project-card-mobile {
+  grid-template-columns: minmax(230px, 0.62fr) minmax(0, 1.38fr);
+}
+.featured-projects .project-card-mobile:nth-child(even) {
+  grid-template-columns: minmax(0, 1.38fr) minmax(230px, 0.62fr);
+}
+.featured-projects .project-card-web:nth-child(even) {
+  grid-template-columns: minmax(300px, 0.75fr) minmax(0, 1.25fr);
+}
 .featured-projects .project-card > img,
 .featured-projects .healthcare-visual {
   min-height: 0;
@@ -345,7 +354,15 @@ textarea:focus-visible {
   object-fit: cover;
 }
 .project-card > img.project-card-image-contain {
-  padding: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1rem, 2vw, 1.75rem);
+  object-fit: contain;
+  background: #ece9e2;
+}
+.project-card > img.project-card-image-full {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  align-self: center;
   object-fit: contain;
   background: #ece9e2;
 }
@@ -444,7 +461,7 @@ textarea:focus-visible {
 }
 .archive-heading {
   max-width: 650px;
-  margin: 8rem 0 3rem;
+  margin: 6rem 0 2.25rem;
 }
 .project-archive {
   display: grid;
@@ -458,22 +475,37 @@ textarea:focus-visible {
 }
 .project-archive .project-card > img,
 .project-archive .healthcare-visual {
-  height: 230px;
+  height: 160px;
   min-height: 0;
   order: 0;
 }
 .project-archive .project-copy {
   flex: 1;
-  padding: 1.75rem;
+  padding: 1.25rem;
   order: 1;
 }
 .project-archive .project-copy h3 {
-  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
 }
 .project-archive .project-copy > p:not(.project-role):not(.eyebrow) {
-  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 .project-archive .project-role {
+  margin: 0.25rem 0 0.85rem;
+  font-size: 0.76rem;
+}
+.project-archive .tag-list {
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+.project-archive .tag-list li {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.62rem;
+}
+.project-archive .project-link {
   font-size: 0.82rem;
 }
 .section-dark {
@@ -720,6 +752,11 @@ textarea:focus-visible {
     max-height: none;
   }
   .project-card {
+    grid-template-columns: 1fr;
+  }
+  .featured-projects .project-card-mobile,
+  .featured-projects .project-card-mobile:nth-child(even),
+  .featured-projects .project-card-web:nth-child(even) {
     grid-template-columns: 1fr;
   }
   .project-card:nth-child(even) > img,

@@ -31,7 +31,7 @@ function Home() {
             <div className="hero-content page-width">
                 <p className="eyebrow light">Senior Frontend Developer · Frontend Team Lead</p>
                 <h1 id="hero-title">Building thoughtful products.<br/><em>Still climbing.</em></h1>
-                <p className="hero-intro">I’m Priska, a software engineer with 8+ years of experience across healthcare, AI, autonomous mobility and SaaS — from Python and Django to React Native, TypeScript and native mobile development.</p>
+                <p className="hero-intro">I’m Priska, a software engineer and frontend team lead with 8+ years of experience building web and mobile products across healthcare, AI and autonomous mobility — from full-stack foundations to frontend architecture and native iOS and Android development.</p>
                 <div className="hero-actions">
                     <a className="button button-primary" href="#work">Explore selected work</a>
                     <a className="text-link light" href="#contact">Let’s work together <span>↗</span></a>

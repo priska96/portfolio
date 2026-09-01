@@ -63,7 +63,8 @@ export interface ProjectCardData {
   role: string;
   technologies: string[];
   image?: string;
-  imageDisplay?: "cover" | "contain";
+  imageDisplay?: "cover" | "contain" | "contain-full";
+  mediaKind?: "web" | "mobile";
   visualWords?: string[];
   featured: boolean;
 }
@@ -121,6 +122,8 @@ export const projects: ProjectCardData[] = [
       "Next.js",
     ],
     image: sciendisWebAppDashboard,
+    imageDisplay: "contain-full",
+    mediaKind: "web",
     featured: true,
   },
   {
@@ -142,6 +145,7 @@ export const projects: ProjectCardData[] = [
     ],
     image: sciendisNfcScan,
     imageDisplay: "contain",
+    mediaKind: "mobile",
     featured: true,
   },
   {
@@ -161,6 +165,7 @@ export const projects: ProjectCardData[] = [
     ],
     image: sciendisCardLinkCart,
     imageDisplay: "contain",
+    mediaKind: "mobile",
     featured: true,
   },
   {
@@ -172,6 +177,8 @@ export const projects: ProjectCardData[] = [
     role: "Frontend Lead Developer",
     technologies: ["React", "React Native", "Java", "Leaflet", "Redis", "ROS"],
     image: fmsThumbnail,
+    imageDisplay: "contain-full",
+    mediaKind: "web",
     featured: true,
   },
   {
@@ -183,6 +190,8 @@ export const projects: ProjectCardData[] = [
     role: "Software Engineer",
     technologies: ["React", "Python", "C++", "ROS", "rosbridge"],
     image: webVisualizerThumbnail,
+    imageDisplay: "contain-full",
+    mediaKind: "web",
     featured: true,
   },
   {
@@ -200,6 +209,8 @@ export const projects: ProjectCardData[] = [
       "TypeScript",
     ],
     image: lottiThumbnail,
+    imageDisplay: "contain-full",
+    mediaKind: "web",
     featured: true,
   },
   {
@@ -222,6 +233,17 @@ export const projects: ProjectCardData[] = [
     role: "Full-Stack Web Developer",
     technologies: ["Python", "Django", "PostgreSQL", "JavaScript", "SCSS"],
     image: twoticketsThumbnail,
+    featured: false,
+  },
+  {
+    key: "ngoWork",
+    title: "NGO & Human Rights Projects",
+    context: "PSCORE · Education · Conferences",
+    summary:
+      "Websites supporting human-rights advocacy, education and international conferences focused on North Korea and reunification.",
+    role: "Web Developer · Digital Contributor",
+    technologies: ["WordPress", "PHP", "JavaScript", "HTML", "CSS"],
+    image: pscore_digital,
     featured: false,
   },
 ];
@@ -449,15 +471,57 @@ export const data: Record<string, ProjectDetailData> = {
   },
   nutritionplanner: {
     vids: [nutritionplanner],
-    cardTitle: "Meal Plan Generator",
+    vidTitle: ["Personalized meal-plan generation and calendar workflow"],
+    cardTitle: "Meal Plan Optimization",
     cardText:
-      "The goal of this project was to create an algorithm to generate personalised meal plans, " +
-      "based on the users’ input and to output them in a calendar overview as well as export them in a pdf " +
-      "file. These meal plans support typical diets and eating habits  and provide a suitable nutrition " +
-      "intake. To create the meal plans and to choose the right  foods in a healthy measurement, an " +
-      "optimization problem was set up and solved by linear programming. The focus was more set on the " +
-      "logic instead on the design, which is why the page has only minimal styling to make it usable. " +
-      "Besides Django (Python) jQuery, CSS and Bootstrap  were used to  implement this website.",
+      "My bachelor thesis explored how personalized meal plans could be generated from nutritional requirements, dietary preferences and user input through mathematical optimization.",
+    role: "Research · Full-Stack Development",
+    focus: ["Optimization model", "Meal-plan generation", "Applied research"],
+    stack: ["Python", "Django", "Linear Programming", "jQuery", "Bootstrap"],
+    sections: [
+      {
+        eyebrow: "Research problem",
+        title: "Turning nutritional constraints into meal plans",
+        body: "I formulated meal-plan generation as a linear optimization problem. The model selected appropriate foods and quantities based on nutritional requirements, supported diets and individual eating preferences.",
+      },
+      {
+        eyebrow: "Application",
+        title: "Making the model usable through the web",
+        body: "I implemented the application with Python and Django and presented generated plans in a calendar overview with PDF export. The interface remained deliberately simple because the primary focus of the thesis was the optimization logic.",
+      },
+    ],
+  },
+  ngoWork: {
+    imgs: [pscore_digital, pscoreedu_register, munscr, modelunsf],
+    imgTitle: [
+      "Digital Life and Digital Rights information page",
+      "PSCORE EDU student and tutor registration",
+      "MUNSCR conference website",
+      "ModelUNSF conference website",
+    ],
+    cardTitle: "NGO & Human Rights Projects",
+    cardText:
+      "I designed, developed and maintained digital projects for PSCORE, a human-rights NGO supporting North Korean defectors, as well as its education and international conference initiatives.",
+    role: "Web Developer · Digital Contributor",
+    focus: ["Human-rights communication", "Education", "Conference platforms"],
+    stack: ["WordPress", "PHP", "JavaScript", "HTML", "CSS"],
+    sections: [
+      {
+        eyebrow: "PSCORE",
+        title: "Digital communication for human-rights work",
+        body: "I created and adapted information pages, improved usability and maintained the organization’s website. The work included content on child abuse, digital rights, online seminars and workshops.",
+      },
+      {
+        eyebrow: "Education",
+        title: "Supporting tutoring for North Korean defectors",
+        body: "For PSCORE EDU, I maintained tutoring content and improved registration administration with a PHP extension that recorded and exposed member registration dates in WordPress.",
+      },
+      {
+        eyebrow: "Conferences",
+        title: "Independent event websites",
+        body: "I designed and developed the MUNSCR and ModelUNSF WordPress websites from scratch and maintained them for recurring international youth and reunification-focused conferences.",
+      },
+    ],
   },
   jabe: {
     imgs: [jabe],

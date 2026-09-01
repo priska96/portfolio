@@ -78,10 +78,12 @@ function AboutMe() {
         </p>
         <p>
           I started with Python and Django and progressively specialized in
-          frontend and mobile engineering. Today I lead frontend work while
-          still enjoying the details: a reusable component, a clean data layer,
-          a difficult native integration or an interface that finally feels
-          simple.
+          frontend and mobile engineering. That foundation included a bachelor
+          thesis in which I modeled personalized meal planning as a linear
+          optimization problem and made it accessible through a Django
+          application. Today I lead frontend work while still enjoying the
+          details: a reusable component, a clean data layer, a difficult native
+          integration or an interface that finally feels simple.
         </p>
         <p>
           Having lived and worked in Berlin and Seoul shaped how I communicate,
