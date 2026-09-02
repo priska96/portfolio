@@ -48,7 +48,7 @@ import sciendisWebAppUsers from "../../images/sciendis-web-app3.png";
 import sciendisNfcIntegration from "../../images/sciendis-integration-nfc-module.mov";
 import sciendisNfcScan from "../../images/sciendis-nfc-module-integration1.png";
 import sciendisNfcResult from "../../images/sciendis-nfc-module-integration2.png";
-import sciendisMobileApp from "../../images/sciendis-mobile-app.mov";
+import sciendisMobileApp from "../../images/sciendis-mobile-app.m4v";
 import sciendisMobileDashboard from "../../images/sciendis-mobile-app1.png";
 import sciendisMobilePatient from "../../images/sciendis-mobile-app2.png";
 import sciendisMobileWound from "../../images/sciendis-mobile-app3.png";
