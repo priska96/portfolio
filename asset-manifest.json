@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.b988c801.css",
-    "main.js": "/portfolio/static/js/main.62d85090.js",
+    "main.css": "/portfolio/static/css/main.57666229.css",
+    "main.js": "/portfolio/static/js/main.fa76364c.js",
     "static/js/453.ace21015.chunk.js": "/portfolio/static/js/453.ace21015.chunk.js",
     "static/media/explain.mp4": "/portfolio/static/media/explain.33a1e8961b43f1dbe363.mp4",
     "static/media/sciendis-mobile-app.m4v": "/portfolio/static/media/sciendis-mobile-app.761f9ba05e670ba75827.m4v",
@@ -24,9 +24,9 @@
     "static/media/munscr.png": "/portfolio/static/media/munscr.17fd36e702589f1e275e.png",
     "static/media/pscore_seminar.png": "/portfolio/static/media/pscore_seminar.486f4c138b4b467d2ae0.png",
     "static/media/fms_admin_zones.png": "/portfolio/static/media/fms_admin_zones.142e50fd07fbf1e40343.png",
+    "static/media/me-transparent.png": "/portfolio/static/media/me-transparent.581c99e752122da85b84.png",
     "static/media/webBagRecorder.mp4": "/portfolio/static/media/webBagRecorder.ac21dcd54557fff2e70e.mp4",
     "static/media/webBagPlayer_poster.png": "/portfolio/static/media/webBagPlayer_poster.1e7ef78a0432da0eb839.png",
-    "static/media/jukan-tateisi-bJhT_8nbUA0-unsplash.jpg": "/portfolio/static/media/jukan-tateisi-bJhT_8nbUA0-unsplash.3322a8be7b06547d92ac.jpg",
     "static/media/poilei_cookies.png": "/portfolio/static/media/poilei_cookies.f4c1b98b07a5e53a813d.png",
     "static/media/pscoreedu_1.png": "/portfolio/static/media/pscoreedu_1.542f45de2a0165e2d611.png",
     "static/media/twotickets_redesign.png": "/portfolio/static/media/twotickets_redesign.afff2b160682b0ad5296.png",
@@ -62,12 +62,12 @@
     "static/media/sciendis-mobile-app1.png": "/portfolio/static/media/sciendis-mobile-app1.4a4ef63fd46b2b690ead.png",
     "static/media/sciendis-mobile-app2.png": "/portfolio/static/media/sciendis-mobile-app2.eb99e292d8b986b15986.png",
     "index.html": "/portfolio/index.html",
-    "main.b988c801.css.map": "/portfolio/static/css/main.b988c801.css.map",
-    "main.62d85090.js.map": "/portfolio/static/js/main.62d85090.js.map",
+    "main.57666229.css.map": "/portfolio/static/css/main.57666229.css.map",
+    "main.fa76364c.js.map": "/portfolio/static/js/main.fa76364c.js.map",
     "453.ace21015.chunk.js.map": "/portfolio/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b988c801.css",
-    "static/js/main.62d85090.js"
+    "static/css/main.57666229.css",
+    "static/js/main.fa76364c.js"
   ]
 }
