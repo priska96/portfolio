@@ -7,7 +7,7 @@ import Experience from "./pages/experience/Experience";
 import Projects from "./pages/projects/Projects";
 import Contact from "./pages/contact/Contact";
 import ProjectDetail from "./pages/projects/ProjectDetail";
-import {Link, Route, Routes, useLocation} from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 function PortfolioHome() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -34,7 +34,7 @@ function PortfolioHome() {
             onClick={closeMenu}
             aria-label="Priska Kohnen, home"
           >
-            Priska Kohnen
+            P.K.
           </Link>
           <button
             className="menu-toggle"

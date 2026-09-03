@@ -1,48 +1,105 @@
-import {useEffect, useState} from 'react';
+import me from "./images/me-transparent.png";
 
-const commands = [
-    'python manage.py runserver',
-    'npm run build',
-    'npx expo start',
-    'git commit -m "keep growing"',
-];
+function HeroPortrait() {
+  return (
+    <figure className="hero-cutout">
+      <div className="hero-cutout-shape" aria-hidden="true" />
+      <img src={me} alt="Priska Kohnen" />
+    </figure>
+  );
+}
 
 function Home() {
-    const [command, setCommand] = useState('');
-    const [commandIndex, setCommandIndex] = useState(0);
-
-    useEffect(() => {
-        const fullCommand = commands[commandIndex];
-        if (command.length < fullCommand.length) {
-            const timeout = window.setTimeout(() => setCommand(fullCommand.slice(0, command.length + 1)), 55);
-            return () => window.clearTimeout(timeout);
-        }
-        const timeout = window.setTimeout(() => {
-            setCommand('');
-            setCommandIndex((index) => (index + 1) % commands.length);
-        }, 1600);
-        return () => window.clearTimeout(timeout);
-    }, [command, commandIndex]);
-
-    return (
-        <section className="hero" id="home" aria-labelledby="hero-title">
-            <div className="hero-image" role="img" aria-label="A child looking up a long flight of stairs"/>
-            <div className="hero-shade"/>
-            <div className="hero-content page-width">
-                <p className="eyebrow light">Senior Frontend Developer · Frontend Team Lead</p>
-                <h1 id="hero-title">Building thoughtful products.<br/><em>Still climbing.</em></h1>
-                <p className="hero-intro">I’m Priska, a software engineer and frontend team lead with 8+ years of experience building web and mobile products across healthcare, AI and autonomous mobility — from full-stack foundations to frontend architecture and native iOS and Android development.</p>
-                <div className="hero-actions">
-                    <a className="button button-primary" href="#work">Explore selected work</a>
-                    <a className="text-link light" href="#contact">Let’s work together <span>↗</span></a>
-                </div>
-                <div className="terminal" aria-label={`Terminal command: ${commands[commandIndex]}`}>
-                    <div className="terminal-bar"><i/><i/><i/><span>priska — journey</span></div>
-                    <div className="terminal-body"><span className="prompt">priska@portfolio:~$</span> {command}<span className="cursor"/></div>
-                </div>
+  return (
+    <div className="hero-options" id="home">
+      <section
+        id="hero-concept-leadership"
+        className="hero hero-leadership"
+        aria-labelledby="hero-leadership-title"
+      >
+        <div className="hero-content page-width">
+          <HeroPortrait />
+          <div className="hero-copy">
+            <p className="eyebrow">Priska Kohnen · Senior Frontend Developer</p>
+            <h1 id="hero-leadership-title" className="hero-statement">
+              <span>Building products.</span>
+              <span>Shaping systems.</span>
+              <span>Leading teams.</span>
+            </h1>
+            <p className="hero-intro">
+              Frontend Team Lead working across React, React Native and native
+              mobile development to turn complex requirements into maintainable
+              products.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#work">
+                View selected work
+              </a>
+              <a className="text-link" href="#contact">
+                Get in touch <span>↗</span>
+              </a>
             </div>
-        </section>
-    );
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="hero-concept-terminal"
+        className="hero hero-terminal"
+        aria-labelledby="hero-terminal-title"
+      >
+        <div className="terminal-shell">
+          <div className="terminal-chrome" aria-hidden="true">
+            <div className="terminal-dots"><i /><i /><i /></div>
+            <span>priska — portfolio</span>
+          </div>
+          <div className="terminal-layout">
+            <div className="terminal-copy">
+              <p className="terminal-command terminal-command-whoami">
+                <span className="terminal-prompt">priska@portfolio:~$</span>{" "}
+                <span className="terminal-typed">whoami</span>
+              </p>
+              <p className="terminal-identity terminal-output-identity">
+                Priska Kohnen<br />
+                <span>Senior Frontend Developer · Frontend Team Lead</span>
+              </p>
+              <p className="terminal-command terminal-command-mission">
+                <span className="terminal-prompt">priska@portfolio:~$</span>{" "}
+                <span className="terminal-typed">cat mission.txt</span>
+              </p>
+              <div className="terminal-output-mission">
+                <h2
+                  id="hero-terminal-title"
+                  className="hero-statement terminal-statement"
+                >
+                  <span>Building products.</span>
+                  <span>Shaping systems.</span>
+                  <span>Leading teams.</span>
+                </h2>
+                <p className="hero-intro terminal-intro">
+                  Frontend Team Lead working across React, React Native and native
+                  mobile development to turn complex requirements into maintainable
+                  products.
+                </p>
+                <div className="hero-actions terminal-actions">
+                  <a className="button button-primary" href="#work">
+                    View selected work
+                  </a>
+                  <a className="text-link light" href="#contact">
+                    Get in touch <span>↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <figure className="terminal-portrait terminal-output-portrait">
+              <img src={me} alt="Priska Kohnen" />
+              <figcaption>PORTRAIT.PNG · TRUE COLOR</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default Home;
