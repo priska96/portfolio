@@ -152,25 +152,6 @@ textarea:focus-visible {
   border-bottom: 1px solid var(--line);
   color: var(--ink);
 }
-.hero-content {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.72fr);
-  gap: clamp(2.5rem, 7vw, 6rem);
-  align-items: center;
-  min-width: 0;
-  padding-top: clamp(3rem, 6vh, 4.5rem);
-  padding-bottom: clamp(3rem, 6vh, 4.5rem);
-}
-.hero-options > .hero:first-child .hero-content {
-  padding-top: clamp(6rem, 9vh, 7rem);
-}
-.hero-copy {
-  width: 100%;
-  min-width: 0;
-  max-width: 720px;
-}
 .hero-statement {
   width: 100%;
   min-width: 0;
@@ -184,25 +165,11 @@ textarea:focus-visible {
 .hero-statement span {
   display: block;
 }
-.hero-leadership .hero-statement span:nth-child(2),
 .hero-terminal .hero-statement span:nth-child(2) {
   color: var(--violet);
   font-family: var(--serif);
   font-weight: 600;
   font-style: italic;
-}
-.hero-leadership .hero-content {
-  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.1fr);
-}
-.hero-leadership .hero-cutout {
-  justify-self: start;
-}
-.hero-leadership .hero-cutout-shape {
-  right: auto;
-  left: 0;
-  width: 78%;
-  border-radius: 50%;
-  background: #e4ddc9;
 }
 .hero-intro {
   max-width: 610px;
@@ -222,31 +189,6 @@ textarea:focus-visible {
 }
 .hero .button-primary:hover {
   background: var(--violet);
-}
-.hero-cutout {
-  position: relative;
-  width: min(100%, 440px);
-  height: min(610px, 68vh);
-  margin: 0;
-  justify-self: end;
-  align-self: end;
-}
-.hero-cutout-shape {
-  position: absolute;
-  right: 3%;
-  bottom: 3%;
-  width: 94%;
-  height: 88%;
-  border-radius: 48% 48% 8% 8%;
-  background: #ebe7dc;
-}
-.hero-cutout img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom;
 }
 .hero-terminal {
   min-height: max(760px, calc(100svh - 72px));
@@ -950,13 +892,6 @@ textarea:focus-visible {
   color: var(--muted);
 }
 @media (max-width: 900px) {
-  .hero-content {
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.55fr);
-    gap: 3rem;
-  }
-  .hero-leadership .hero-content {
-    grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1fr);
-  }
   .terminal-layout {
     grid-template-columns: minmax(0, 1fr) minmax(220px, 0.48fr);
     gap: 2rem;
@@ -1032,19 +967,6 @@ textarea:focus-visible {
     width: 100%;
     padding: 1rem;
   }
-  .hero-content {
-    grid-template-columns: 1fr;
-    width: calc(100% - 1.25rem);
-    max-width: calc(100% - 1.25rem);
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-  .hero-options > .hero:first-child .hero-content {
-    padding-top: 6rem;
-  }
-  .hero-leadership .hero-content {
-    grid-template-columns: 1fr;
-  }
   .hero-statement {
     font-size: clamp(2.75rem, 13vw, 4rem);
   }
@@ -1053,18 +975,6 @@ textarea:focus-visible {
   }
   .hero-actions {
     gap: 1rem;
-  }
-  .hero-cutout {
-    width: min(88%, 340px);
-    height: 440px;
-    margin-top: 0.5rem;
-    justify-self: start;
-  }
-  .hero-leadership .hero-copy {
-    order: 1;
-  }
-  .hero-leadership .hero-cutout {
-    order: 2;
   }
   .terminal-chrome {
     gap: 0.75rem;
